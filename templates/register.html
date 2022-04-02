@@ -1,0 +1,33 @@
+{% extends "template.html" %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% block head %}
+<title> Register </title>
+{% endblock %}
+
+
+{% block content %}
+<form action="http://127.0.0.1:5000/register" method="post">
+
+    <label for="username">Username</label>
+    <input type="text" id="Username" name="Username">
+
+    <label for="mail"> Email </label>
+    <input type="text" id="Email" name="Email">
+
+    <label for="name">Real Name</label>
+    <input type="text" id="Real Name" name="Real Name">
+
+    <label for="Password">Password</label>
+    <textarea id="text" name="Password"></textarea>
+
+    <button type="register_1">Register as Instructor</button>
+    <button type="register_2">Register as Student</button>
+</form>
+{% endblock %}

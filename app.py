@@ -13,28 +13,18 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
 # todo: change to our own type
-class Instructor(db.Model):
-    __tablename__ = 'Instructor'
-    pId = db.Column(db.Integer, primary_key = True)
-    pName = db.Column(db.String(20), nullable = False)
+class Person(db.Model):
+    __tablename__ = 'Person'
+    Id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(20), nullable = False)
     username = db.Column(db.String(20), unique=True, nullable = False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(20), nullable = False)
+    # 0 is student, 1 is Instructor
+    typePerson = db.Column(db.Integer, nullable = False)
 
     def __repr__(self):
-        return f"Instructor('{self.pName}', '{self.email}')"
-
-class Student(db.Model):
-    __tablename__ = 'Student'
-    stuId = db.Column(db.Integer, primary_key = True)
-    stuName = db.Column(db.String(20), nullable = False)
-    username = db.Column(db.String(20), nullable = False, unique=True)
-    password = db.Column(db.String(20), nullable = False)
-    email = db.Column(db.String(20), unique=True, nullable=False)
-
-
-    def __repr__(self):
-        return f"Student('{self.stuName}', '{self.email}')"
+        return f"Person('{self.Name}', '{self.email}', '{self.typePerson}')"
 
 class Evaluation(db.Model):
     __tablename__ = 'Evaluation'
@@ -46,8 +36,8 @@ class Evaluation(db.Model):
     remarkText = db.Column(db.String(200), nullable=False)
 
     # foreign key, need to change
-    student_id = db.Column(db.Integer, db.ForeignKey('Student.stuId'), nullable = False)
-    instructor_id = db.Column(db.Integer, db.ForeignKey('Instructor.pId'), nullable = False)
+    student_id = db.Column(db.Integer, db.ForeignKey('Person.Id'), nullable = False)
+    instructor_id = db.Column(db.Integer, db.ForeignKey('Person.Id'), nullable = False)
 
     def __repr__(self):
         return f"Evaluation('{self.typeName}', '{self.stuMark}')"
@@ -58,8 +48,8 @@ class Feedback(db.Model):
     feedbackText = db.Column(db.String(200), nullable=False)
 
     # foreign key, need to change
-    student_id = db.Column(db.Integer, db.ForeignKey('Student.stuId'), nullable = False)
-    instructor_id = db.Column(db.Integer, db.ForeignKey('Instructor.pId'), nullable = False)
+    student_id = db.Column(db.Integer, db.ForeignKey('Person.Id'), nullable = False)
+    instructor_id = db.Column(db.Integer, db.ForeignKey('Person.Id'), nullable = False)
 
     def __repr__(self):
         return f"Evaluation('{self.student_id}', '{self.instructor_id}')"
@@ -68,6 +58,32 @@ class Feedback(db.Model):
 @app.route("/home")
 def home():
     return render_template("index.html")
+
+@app.route('/register', methods = ['GET', 'POST'])
+def register():
+    if request.method == 'GET':
+        return render_template('register.html')
+    else:
+        username = request.form['Username']
+        email = request.form['Email']
+
+        # we need to change here
+        name = request.form['Real Name']
+        typePerson = request.form['type']
+        # we need to change here
+
+        hashed_password = bcrypt.generate_password_hash(request.form['Password']).decode('utf-8')
+        reg_details =(
+            username,
+            email,
+            name,
+            hashed_password
+        )
+        add_users(reg_details, type)
+        flash('Registration Successful! Please login now:')
+        return redirect(url_for('login'))
+
+
 
 @app.route("/anonfeedback")
 def anonfeedback():
@@ -101,6 +117,15 @@ def assignment():
 def courseteam():
     return render_template("courseteam.html")
 
+def add_users(reg_details):
+    if (reg_details[] == 'Instructor'):
+        instructor = Instructor(username = reg_details[0], pName= reg_details[1], email = reg_details[2], password = reg_details[3])
+        db.session.add(instructor)
+        db.session.commit()
+    if (type == 'Student'):
+        student = Student(username = reg_details[0], stuName = reg_details[1], email = reg_details[2], password = reg_details[3])
+        db.session.add(student)
+        db.session.commit()
+
 if __name__ == "__main__":
-    app.secret_key = b"secretkey"
     app.run(debug=True)
