@@ -22,7 +22,7 @@ class Instructor(db.Model):
     password = db.Column(db.String(20), nullable = False)
 
     def __repr__(self):
-        return f"Person('{self.username}', '{self.email}')"
+        return f"Instructor('{self.pName}', '{self.email}')"
 
 class Student(db.Model):
     __tablename__ = 'Student'
