@@ -14,7 +14,7 @@ bcrypt = Bcrypt(app)
 
 # todo: change to our own type
 class Instructor(db.Model):
-    __tablename__ = 'Person'
+    __tablename__ = 'Instructor'
     pId = db.Column(db.Integer, primary_key = True)
     pName = db.Column(db.String(20), nullable = False)
     username = db.Column(db.String(20), unique=True, nullable = False)
@@ -32,8 +32,6 @@ class Student(db.Model):
     password = db.Column(db.String(20), nullable = False)
     email = db.Column(db.String(20), unique=True, nullable=False)
 
-    # foreign key, need to change
-    person_id = db.Column(db.Integer, db.ForeignKey('Person.id'), nullable = False)
 
     def __repr__(self):
         return f"Student('{self.stuName}', '{self.email}')"
@@ -49,7 +47,7 @@ class Evaluation(db.Model):
 
     # foreign key, need to change
     student_id = db.Column(db.Integer, db.ForeignKey('Student.stuId'), nullable = False)
-    instructor_id = db.Column(db.Integer, db.ForeignKey('Instructor.stuId'), nullable = False)
+    instructor_id = db.Column(db.Integer, db.ForeignKey('Instructor.pId'), nullable = False)
 
     def __repr__(self):
         return f"Evaluation('{self.typeName}', '{self.stuMark}')"
@@ -61,7 +59,7 @@ class Feedback(db.Model):
 
     # foreign key, need to change
     student_id = db.Column(db.Integer, db.ForeignKey('Student.stuId'), nullable = False)
-    instructor_id = db.Column(db.Integer, db.ForeignKey('Instructor.stuId'), nullable = False)
+    instructor_id = db.Column(db.Integer, db.ForeignKey('Instructor.pId'), nullable = False)
 
     def __repr__(self):
         return f"Evaluation('{self.student_id}', '{self.instructor_id}')"
