@@ -13,13 +13,13 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
 # todo: change to our own type
-class Teacher(db.Model):
+class Instructor(db.Model):
     __tablename__ = 'Person'
-    id = db.Column(db.Integer, primary_key = True)
+    pId = db.Column(db.Integer, primary_key = True)
+    pName = db.Column(db.String(20), nullable = False)
     username = db.Column(db.String(20), unique=True, nullable = False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(20), nullable = False)
-    notes = db.relationship('Notes', backref='author', lazy = True)
 
     def __repr__(self):
         return f"Person('{self.username}', '{self.email}')"
