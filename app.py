@@ -24,7 +24,7 @@ class Person(db.Model):
     typePerson = db.Column(db.Integer, nullable = False)
 
     def __repr__(self):
-        return f"Person('{self.Name}', '{self.email}', '{self.typePerson}')"
+        return f"Person('{self.name}', '{self.email}', '{self.typePerson}')"
 
 class Evaluation(db.Model):
     __tablename__ = 'Evaluation'
@@ -64,24 +64,23 @@ def register():
     if request.method == 'GET':
         return render_template('register.html')
     else:
+        typePerson = request.form['typePerson']
+        name = request.form['realName']
         username = request.form['Username']
         email = request.form['Email']
-
-        # we need to change here
-        name = request.form['Real Name']
-        typePerson = request.form['type']
-        # we need to change here
-
         hashed_password = bcrypt.generate_password_hash(request.form['Password']).decode('utf-8')
+        
         reg_details =(
+            typePerson,
+            # Id will be provided automatically by machine
+            name,
             username,
             email,
-            name,
             hashed_password
         )
-        add_users(reg_details, type)
+        add_users(reg_details)
         flash('Registration Successful! Please login now:')
-        return redirect(url_for('login'))
+        return redirect(url_for('register'))
 
 
 
@@ -118,14 +117,10 @@ def courseteam():
     return render_template("courseteam.html")
 
 def add_users(reg_details):
-    if (reg_details[] == 'Instructor'):
-        instructor = Instructor(username = reg_details[0], pName= reg_details[1], email = reg_details[2], password = reg_details[3])
-        db.session.add(instructor)
-        db.session.commit()
-    if (type == 'Student'):
-        student = Student(username = reg_details[0], stuName = reg_details[1], email = reg_details[2], password = reg_details[3])
-        db.session.add(student)
-        db.session.commit()
+    instructor = Person(typePerson = reg_details[0], name = reg_details[1], username= reg_details[2], email = reg_details[3], password = reg_details[4])
+    db.session.add(instructor)
+    db.session.commit()
+
 
 if __name__ == "__main__":
     app.run(debug=True)
