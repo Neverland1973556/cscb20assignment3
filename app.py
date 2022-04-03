@@ -82,7 +82,9 @@ def register():
         flash('Registration Successful! Please login now:')
         return redirect(url_for('register'))
 
-
+@app.route("/login")
+def login():
+    return render_template("login.html")
 
 @app.route("/anonfeedback")
 def anonfeedback():
