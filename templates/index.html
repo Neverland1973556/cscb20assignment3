@@ -3,25 +3,19 @@
 {% block head %}
 <title> Home Page </title>
 {% endblock %}
-
+<!-- todo: change the welcome message -->
 {% block content %}
 {% if session.name %}
   {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      {% for message in messages %}
-        <div>Welcome back <strong>{{ session.name }}!</strong> you are {{ message }}</div>
-      {% endfor %}
-    {% else %}
-      <h3> Welcome {{ session.name }} to B20 lecture notes!</h3>
-      <p> Now you can add and view lecture notes </p>
-    {% endif %}
-  {% endwith %}
-
-{% else %}
-  <h1>This is my {{ pagename }} page</h1>
-  <p> This web app contains the lecture notes collection for lectures 1 to 13 </p> 
+  {% if messages %}
+    {% for message in messages %}
+      <div>Welcome back <strong>{{ session.name }}!</strong> you are {{ message }}</div>
+    {% endfor %}
+  {% else %}
+    <h3> Welcome {{ session.name }} to B20 lecture notes!</h3>
+    <p> Now you can add and view lecture notes </p>
   {% endif %}
-
+  {% endwith %}
 <h1><strong>Home Page</strong></h1>
 <h2>Course
     Information</h2>
@@ -58,5 +52,12 @@
 
     </ul>
 </div>
+
+
+
+{% else %}
+  <h1>This is UTSC CSCB20 Website</h1>
+  <p> Welcome to CSCB20 Website, Please Login or Register</p> 
+{% endif %}
 
 {% endblock %}

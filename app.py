@@ -55,7 +55,7 @@ class Feedback(db.Model):
         return f"Evaluation('{self.student_id}', '{self.instructor_id}')"
 
 @app.route("/")
-@app.route("/home")
+@app.route("/index")
 def home():
     return render_template("index.html")
 
@@ -79,12 +79,38 @@ def register():
             hashed_password
         )
         add_users(reg_details)
-        flash('Registration Successful! Please login now:')
-        return redirect(url_for('register'))
+        flash('Registration Successful! Please login now.')
+        return redirect(url_for('login'))
 
-@app.route("/login")
+# @app.route("/login")
+# def login():
+#     return render_template("login.html")
+
+@app.route('/login', methods = ['GET', 'POST'])
 def login():
-    return render_template("login.html")
+    if request.method == 'GET':
+        if 'name' in session:
+            flash('Already logged in!!')
+            return redirect(url_for('home'))
+        else:
+            return render_template('login.html')
+    else:
+        username = request.form['Username']
+        password = request.form['Password']
+        person = Person.query.filter_by(username = username).first()
+        if not person or not bcrypt.check_password_hash(person.password, password):
+            flash('Please check your login details and try again!', 'error')
+            return render_template('login.html')
+        else:
+            session['name'] = username
+            session.permanent = True
+            return redirect(url_for('home'))
+
+@app.route('/logout')
+def logout():
+    session.pop('name', default = None)
+    flash('You have successfully logged out!')
+    return redirect(url_for('home'))
 
 @app.route("/anonfeedback")
 def anonfeedback():
