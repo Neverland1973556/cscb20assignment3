@@ -7,7 +7,9 @@
 {% with messages = get_flashed_messages(with_categories = True) %}
     {% if messages %}
         {% for category, message in messages %}
-            <div>{{ category }} - {{ message }}</div>
+        <div class = "welcome">
+            <h3>{{ category }} - {{ message }}</h3>
+        </div>
         {% endfor %}
     {% endif %}
 {% endwith %}

@@ -5,14 +5,16 @@ from flask_bcrypt import Bcrypt
 from sqlalchemy import text # textual queries
 
 app = Flask(__name__)
-# what is this?
 app.config['SECRET_KEY'] = 'secret_key'
+# set up the database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///a3database.db'
+# logout every 15 minutes
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes = 15)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
-# todo: change to our own type
+# use person to record users
+# typePerson indicate if it's student or Instructor
 class Person(db.Model):
     __tablename__ = 'Person'
     Id = db.Column(db.Integer, primary_key = True)
@@ -26,6 +28,7 @@ class Person(db.Model):
     def __repr__(self):
         return f"Person('{self.name}', '{self.email}', '{self.typePerson}')"
 
+# schema for grades
 class Evaluation(db.Model):
     __tablename__ = 'Evaluation'
     eid = db.Column(db.Integer, primary_key = True)
@@ -42,6 +45,7 @@ class Evaluation(db.Model):
     def __repr__(self):
         return f"Evaluation('{self.typeName}', '{self.stuMark}')"
 
+# schema for feedback
 class Feedback(db.Model):
     __tablename__ = 'Feedback'
     fid = db.Column(db.Integer, primary_key = True)
@@ -54,11 +58,15 @@ class Feedback(db.Model):
     def __repr__(self):
         return f"Evaluation('{self.student_id}', '{self.instructor_id}')"
 
+# home page, press home to go back here
 @app.route("/")
+@app.route("/home")
 @app.route("/index")
 def home():
     return render_template("index.html")
 
+# todo: if empty info or wrong info, flash
+# register page
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
     if request.method == 'GET':
@@ -82,10 +90,7 @@ def register():
         flash('Registration Successful! Please login now.')
         return redirect(url_for('login'))
 
-# @app.route("/login")
-# def login():
-#     return render_template("login.html")
-
+# login page
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     if request.method == 'GET':
@@ -106,16 +111,18 @@ def login():
             session.permanent = True
             return redirect(url_for('home'))
 
+# logout page
 @app.route('/logout')
 def logout():
     session.pop('name', default = None)
-    flash('You have successfully logged out!')
+    flash('You have successfully logged out! Now you can login or register!')
     return redirect(url_for('home'))
 
 @app.route("/anonfeedback")
 def anonfeedback():
     return render_template("anonfeedback.html")
 
+# information from assignment2
 @app.route("/test")
 def test():
     return render_template("test.html")
@@ -144,6 +151,7 @@ def assignment():
 def courseteam():
     return render_template("courseteam.html")
 
+# helper function to add users to the database
 def add_users(reg_details):
     instructor = Person(typePerson = reg_details[0], name = reg_details[1], username= reg_details[2], email = reg_details[3], password = reg_details[4])
     db.session.add(instructor)
