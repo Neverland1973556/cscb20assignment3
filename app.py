@@ -33,6 +33,7 @@ class Person(db.Model):
 class Evaluation(db.Model):
     __tablename__ = 'Evaluation'
     eid = db.Column(db.Integer, primary_key = True)
+    stuName = db.Column(db.String(20), nullable = False)
     typeName = db.Column(db.String(20), nullable = False, unique=True)
     totalMark = db.Column(db.Integer)
     stuMark = db.Column(db.Integer)
@@ -171,6 +172,10 @@ def evaluation():
 @app.route("/feedback")
 def feedback():
     return render_template("feedback.html")
+
+@app.route("/teacherGrade")
+def teacherGrade():
+    return render_template("teacherGrade.html")
 
 # helper function to add users to the database
 def add_users(reg_details):
