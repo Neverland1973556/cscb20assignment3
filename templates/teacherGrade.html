@@ -1,0 +1,18 @@
+{% extends "template.html" %}
+
+{% block head %}
+<title> Class Grades </title>
+{% endblock %}
+
+{% block content %}
+
+<div class = "evaluations">
+    {% for Evaluations in query_evaluations_result %}
+    <ul>
+        <li> {{ Evaluations.stuName }} - {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }}  </li>
+    </ul>
+    {% endfor %} 
+</div>
+
+{% endblock %}
+
