@@ -12,6 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///a3database.db'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes = 15)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
+setIns = set()
 
 # use person to record users
 # typePerson indicate if it's student or Instructor
@@ -52,8 +53,7 @@ class Feedback(db.Model):
     feedbackText = db.Column(db.String(200), nullable=False)
 
     # foreign key, need to change
-    student_id = db.Column(db.Integer, db.ForeignKey('Person.Id'), nullable = False)
-    instructor_id = db.Column(db.Integer, db.ForeignKey('Person.Id'), nullable = False)
+    instructor_username= db.Column(db.Integer, db.ForeignKey('Person.username'), nullable = False)
 
     def __repr__(self):
         return f"Evaluation('{self.student_id}', '{self.instructor_id}')"
@@ -78,6 +78,10 @@ def register():
         email = request.form['Email']
         hashed_password = bcrypt.generate_password_hash(request.form['Password']).decode('utf-8')
         
+        # if (username in setStu) or (username in setIns):
+        #     flash('There is already a same username existing.')
+        #     return redirect(url_for('login'))
+
         reg_details =(
             typePerson,
             # Id will be provided automatically by machine
@@ -87,6 +91,7 @@ def register():
             hashed_password
         )
         add_users(reg_details)
+
         flash('Registration Successful! Please login now.')
         return redirect(url_for('login'))
 
@@ -108,6 +113,14 @@ def login():
             return render_template('login.html')
         else:
             session['name'] = username
+            # if int(typePerson) == 0:
+            # # When it is a student
+            #     setStu.add(username)
+            print(person.typePerson)
+            if person.typePerson == 1:
+                session['type'] = 1
+            else:
+                session['type'] = 0
             session.permanent = True
             return redirect(url_for('home'))
 
@@ -150,6 +163,14 @@ def assignment():
 @app.route("/courseteam")
 def courseteam():
     return render_template("courseteam.html")
+
+@app.route("/evaluation")
+def evaluation():
+    return render_template("evaluation.html")
+
+@app.route("/feedback")
+def feedback():
+    return render_template("feedback.html")
 
 # helper function to add users to the database
 def add_users(reg_details):

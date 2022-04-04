@@ -17,17 +17,24 @@
         <div class="leftNavigation">
             <ul>
                 {% if session.name %}
-                <h3><a href="{{ url_for('home') }}">Home</a></h3>
-                <h3><a href="{{ url_for('calender')}}">Calendar</a></h3>
-                <h3><a href="https://piazza.com/utoronto.ca">Piazza</a></h3>
-                <h3><a href="{{ url_for('lecture')}}">Lecture</a></h3>
-                <h3><a href="{{ url_for('tut')}}">(Tut) Lab</a></h3>
-                <h3><a href="{{ url_for('assignment')}}">Assignment</a></h3>
-                <h3><a href="{{ url_for('test')}}">Test</a></h3>
-                <h3><a href="{{ url_for('resource')}}">Resource</a></h3>
-                <h3><a href="{{ url_for('courseteam')}}">Course Team</a></h3>
-                <h3><a href="{{ url_for('anonfeedback') }}">Anon Feedback</a></h3>
-                <h3><a href="https://markus.utsc.utoronto.ca/">Markus</a></h3>
+                    <h3><a href="{{ url_for('home') }}">Home</a></h3>
+                    <h3><a href="{{ url_for('calender')}}">Calendar</a></h3>
+                    <h3><a href="https://piazza.com/utoronto.ca">Piazza</a></h3>
+                    <h3><a href="{{ url_for('lecture')}}">Lecture</a></h3>
+                    <h3><a href="{{ url_for('tut')}}">(Tut) Lab</a></h3>
+                    <h3><a href="{{ url_for('assignment')}}">Assignment</a></h3>
+                    <h3><a href="{{ url_for('test')}}">Test</a></h3>
+                    <h3><a href="{{ url_for('resource')}}">Resource</a></h3>
+                    <h3><a href="{{ url_for('courseteam')}}">Course Team</a></h3>
+                    <h3><a href="https://markus.utsc.utoronto.ca/">Markus</a></h3>
+                    {% if session.type == 0 %}
+                        <!-- student -->
+                        <h3><a href="{{ url_for('anonfeedback') }}">Anon Feedback</a></h3>
+                        <h3><a href="{{ url_for('evaluation') }}">Evaluation</a></h3>
+                    {% else %}
+                        <!-- teacher -->
+                        <h3><a href="{{ url_for('feedback') }}">Feedback</a></h3>
+                    {% endif %}
                 <h3><a href="{{ url_for('logout') }}">Logout</a></h3>
                 {% else %}
                 <h3><a href="{{ url_for('home') }}">Home</a></h3>

@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+
+{% block head %}
+<title> Student Grade </title>
+{% endblock %}
+
+{% block content %}
+<!-- {% for Notes in query_notes_result %}
+ <p> {{ Notes }} </p>
+{% endfor %}  -->
+<div class = "evaluations">
+    {% for Evaluations in query_evaluations_result %}
+    <ul>
+        <li> {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }}  </li>
+        <label for="remark_req">remark request</label>
+        <textarea id="remark_Text" name="remark_Text"></textarea>
+        <button type="Remark">Remark</button>
+    </ul>
+</div>
+
+{% endblock %}
+

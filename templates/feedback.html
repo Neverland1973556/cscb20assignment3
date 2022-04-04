@@ -1,0 +1,23 @@
+{% extends "template.html" %}
+
+{% block head %}
+<title> Feedbacks </title>
+{% endblock %}
+
+{% block content %}
+
+
+
+<!-- {% for Notes in query_notes_result %}
+ <p> {{ Notes }} </p>
+{% endfor %}  -->
+<br>
+<div class = "feedbacks">
+    {% for Feedbacks in query_feedbacks_result %}
+    <ul>
+        <li> {{ Feedbacks.feedbackText }} </li>
+    </ul>
+</div>
+
+{% endblock %}
+

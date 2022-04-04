@@ -3,22 +3,22 @@
 {% block head %}
 <title> Home Page </title>
 {% endblock %}
-<!-- todo: change the welcome message -->
 {% block content %}
 {% if session.name %}
   {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for message in messages %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class = "welcome">
+          <div>Welcome back <strong>{{ session.name }}!</strong> you are {{ message }}</div>
+        </div>
+      {% endfor %}
+    {% else %}
       <div class = "welcome">
-        <div>Welcome back <strong>{{ session.name }}!</strong> you are {{ message }}</div>
+        <h3>Welcome {{ session.name }} to B20 lecture notes!</h3>
+        <h3>eee{{ session.type }}eee</h3>
       </div>
-    {% endfor %}
-  {% else %}
-  <!-- todo: add instructor or student -->
-    <div class = "welcome">
-      <h3>Welcome {{ session.name }} to B20 lecture notes!</h3>
-    </div>
-  {% endif %}
+    {% endif %}
+
   {% endwith %}
 <!-- normal stuff -->
 <h1><strong>Home Page</strong></h1>
@@ -58,10 +58,17 @@
     </ul>
 </div>
 
-
-
 {% else %}
 <!-- not logged in, let user login or register -->
+{% with messages = get_flashed_messages(with_categories = True) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class = "welcome">
+            <h3>{{ category }} - {{ message }}</h3>
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 <div class = "welcome">
   <h1>This is UTSC CSCB20 Website</h1>
   <p>Welcome to CSCB20 Website, Please Login or Register</p> 
