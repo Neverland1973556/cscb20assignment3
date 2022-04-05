@@ -1,5 +1,8 @@
 @media (min-width: 975px) {
 	body {
+		background-image: url(./sub/a14.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;
 		background-color: #fffadc;
 		color: #000000;
 		font-family: Geneva, Arial, Helvetica, sans-serif;
