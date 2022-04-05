@@ -13,10 +13,11 @@
 {% endfor %}  -->
 <br>
 <div class = "feedbacks">
-    {% for Feedbacks in query_feedbacks_result %}
     <ul>
+    {% for Feedbacks in feedback_for_instructor %}
         <li> {{ Feedbacks.feedbackText }} </li>
     </ul>
+    {% endfor %}
 </div>
 
 {% endblock %}

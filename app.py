@@ -39,10 +39,8 @@ class Evaluation(db.Model):
     stuMark = db.Column(db.Integer)
     remarkReq = db.Column(db.Boolean)
     remarkText = db.Column(db.String(200), nullable=False)
-
-    # foreign key, need to change
-    student_id = db.Column(db.Integer, db.ForeignKey('Person.Id'), nullable = False)
-    instructor_id = db.Column(db.Integer, db.ForeignKey('Person.Id'), nullable = False)
+    student_username = db.Column(db.Integer, db.ForeignKey('Person.username'), nullable = False)
+    instructor_username = db.Column(db.Integer, db.ForeignKey('Person.username'), nullable = False)
 
     def __repr__(self):
         return f"Evaluation('{self.typeName}', '{self.stuMark}')"
@@ -52,8 +50,6 @@ class Feedback(db.Model):
     __tablename__ = 'Feedback'
     fid = db.Column(db.Integer, primary_key = True)
     feedbackText = db.Column(db.String(200), nullable=False)
-
-    # foreign key, need to change
     instructor_username= db.Column(db.Integer, db.ForeignKey('Person.username'), nullable = False)
 
     def __repr__(self):
@@ -132,9 +128,31 @@ def logout():
     flash('You have successfully logged out! Now you can login or register!')
     return redirect(url_for('home'))
 
-@app.route("/anonfeedback")
+
+
+@app.route("/anonfeedback", methods = ['GET', 'POST'])
 def anonfeedback():
-    return render_template("anonfeedback.html")
+    query_instructors_all = query_instructors()
+    if request.method == 'GET':
+        return render_template("anonfeedback.html", query_instructors_all = query_instructors_all)
+    else:
+        username = request.form['instructors']
+        text_for_instructors = request.form['todo-input']
+        feedback_details =(
+            username,
+            # Id will be provided automatically by machine
+            text_for_instructors
+        )
+        add_feedbacks(feedback_details)
+        return redirect(url_for('anonfeedback'))
+
+@app.route("/feedback", methods = ['GET', 'POST'])
+def feedback():
+    username = session['name']
+    feedback_for_instructor = query_instructors_see(username)
+    if request.method == 'GET':
+         return render_template("feedback.html", feedback_for_instructor = feedback_for_instructor)
+    # query_feedbacks_result
 
 # information from assignment2
 @app.route("/test")
@@ -169,10 +187,6 @@ def courseteam():
 def evaluation():
     return render_template("evaluation.html")
 
-@app.route("/feedback")
-def feedback():
-    return render_template("feedback.html")
-
 @app.route("/teacherGrade")
 def teacherGrade():
     return render_template("teacherGrade.html")
@@ -182,7 +196,19 @@ def add_users(reg_details):
     instructor = Person(typePerson = reg_details[0], name = reg_details[1], username= reg_details[2], email = reg_details[3], password = reg_details[4])
     db.session.add(instructor)
     db.session.commit()
+    
+def add_feedbacks(feedback_details):
+    feedback = Feedback(instructor_username = feedback_details[0], feedbackText = feedback_details[1])
+    db.session.add(feedback)
+    db.session.commit()
 
+def query_instructors():
+    query_instructor = db.session.query(Person).filter(Person.typePerson == 1)
+    return query_instructor
+
+def query_instructors_see(username):
+    query_instructor = db.session.query(Feedback).filter(Feedback.instructor_username == username)
+    return query_instructor
 
 if __name__ == "__main__":
     app.run(debug=True)

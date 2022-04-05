@@ -5,10 +5,8 @@
 {% endblock %}
 
 {% block content %}
-<div id="form">
+<form action="http://127.0.0.1:5000/anonfeedback" method = "post">
     <p>
-    What feedback would you like to give about this course? Feel free to submit a comment below.
-    <br></br>
     (a)  What do you like about the instructor teaching? 
     <br></br>
     (b)  What do you recommend the instructor to do to improve their teaching? 
@@ -17,18 +15,16 @@
     <br></br>
     (d)  What do you recommend the lab instructors to do to improve their lab teaching? 
     </p>
-
     <h3>Instructors</h3>
     <select name="instructors" id="instructors">
-      <option value="volvo">Bhavajan Amarasingham</option>
-      <option value="saab">Peijia Guo</option>
-      <option value="opel">Zhitao Xu</option>
+      {% for Person in query_instructors_all %}
+      <option value="{{ Person.username }}">Instructor Name: {{ Person.name }} / Username: {{ Person.username }}  </option>
+      {% endfor %} 
     </select>
     <br><br>
     <textarea type="text" name="todo-input" placeholder="Enter your feedback here" id="form_text"></textarea>
-
     <br>
-    <input type="submit" name="todo-submit" value="submit" id="form_button">
-</div>
+    <button type="Submit">Submit</button>
+  </form>
 {% endblock %}
 
