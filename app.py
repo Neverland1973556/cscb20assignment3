@@ -174,12 +174,21 @@ def feedback():
 
 @app.route("/teacherGrade", methods = ['GET', 'POST'])
 def teacherGrade():
-    return render_template("teacherGrade.html")
+    get_student_marks = query_all_student_marks()
+    print(get_student_marks)
+    if request.method == 'GET':
+        return render_template("teacherGrade.html", query_all_student_mark = get_student_marks)
+    else:
+        mark = request.form['stuMark']
+        eid = request.form['eid']
+        add_mark(mark, eid)
+        return redirect(url_for('teacherGrade'))
 
 @app.route("/evaluation", methods = ['GET', 'POST'])
 def evaluation():
     username = session['name']
     student_marks = query_student_marks(username)
+    print(student_marks)
     if request.method == 'GET':
         return render_template("evaluation.html", query_student_marks = student_marks)
     else:
@@ -244,6 +253,10 @@ def add_remark_text(text_to_remark, eid):
     db.session.query(Evaluation).filter(Evaluation.eid == eid ).update({'remarkText': text_to_remark})
     db.session.commit()
 
+def add_mark(mark, eid):
+    db.session.query(Evaluation).filter(Evaluation.eid == eid ).update({'stuMark': mark})
+    db.session.commit()
+
 def query_instructors():
     query_instructor = db.session.query(Person).filter(Person.typePerson == 1)
     return query_instructor
@@ -254,6 +267,10 @@ def query_instructors_see(username):
 
 def query_student_marks(username):
     student_marks = db.session.query(Evaluation).filter(Evaluation.student_username == username)
+    return student_marks
+
+def query_all_student_marks():
+    student_marks = db.session.query(Evaluation)
     return student_marks
 
 if __name__ == "__main__":

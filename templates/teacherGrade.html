@@ -7,13 +7,18 @@
 {% block content %}
 
 <div class = "evaluations">
-    <form action="http://127.0.0.1:5000/login" method = "post">
-        {% for Evaluations in query_evaluations_result %}
-        <ul>
-            <li> {{ Evaluations.stuName }} - {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }}  </li>
-        </ul>
-        {% endfor %} 
+    <ul>
+        {% for Evaluations in query_all_student_mark %}
+        <li> {{ Evaluations.stuName }} - {{ student_username }} - {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }} - {{ Evaluations.remarkText }}</li>
+        
+        <form action="http://127.0.0.1:5000/teacherGrade" method = "post">
+            <input id = "eid" name="eid"  value = {{ Evaluations.eid }} readonly></input>
+            <input id="stuMark" name="stuMark">{{ Evaluations.stuMark }}</input>
+            <button type="Remark">Remark</button>
     </form>
+        {% endfor %}
+    </ul>
+
 </div>
 
 {% endblock %}
