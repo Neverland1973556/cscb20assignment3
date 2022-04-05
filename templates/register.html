@@ -1,18 +1,19 @@
 {% extends "template.html" %}
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-            <div>{{ message }}</div>
-        {% endfor %}
-    {% endif %}
-{% endwith %}
-
 {% block head %}
 <title> Register </title>
 {% endblock %}
 
-
 {% block content %}
+{% with messages = get_flashed_messages(with_categories = True) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class = "welcome">
+            <h3>{{ category }} - {{ message }}</h3>
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
 <form action="http://127.0.0.1:5000/register" method="post">
 
     <label for="username">Username</label>

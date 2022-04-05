@@ -12,16 +12,19 @@
  <p> {{ Notes }} </p>
 {% endfor %}  -->
 <br>
-<div class = "feedbacks">
+<div class="feedbacks">
     <p>
-       Students' Feeback for instructor: 
+        Students' Feedback for instructor
+        {% if session.name %}
+            {{ session.name }}:
+        {% endif %}
     </p>
+
     <ul>
         {% for Feedbacks in feedback_for_instructor %}
-            <li> {{ Feedbacks.feedbackText }} </li>
+        <li> {{ Feedbacks.feedbackText }} </li>
         {% endfor %}
     </ul>
 </div>
 
 {% endblock %}
-

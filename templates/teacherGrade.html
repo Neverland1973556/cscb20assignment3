@@ -7,11 +7,13 @@
 {% block content %}
 
 <div class = "evaluations">
-    {% for Evaluations in query_evaluations_result %}
-    <ul>
-        <li> {{ Evaluations.stuName }} - {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }}  </li>
-    </ul>
-    {% endfor %} 
+    <form action="http://127.0.0.1:5000/login" method = "post">
+        {% for Evaluations in query_evaluations_result %}
+        <ul>
+            <li> {{ Evaluations.stuName }} - {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }}  </li>
+        </ul>
+        {% endfor %} 
+    </form>
 </div>
 
 {% endblock %}

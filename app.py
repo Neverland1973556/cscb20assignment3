@@ -33,14 +33,12 @@ class Person(db.Model):
 class Evaluation(db.Model):
     __tablename__ = 'Evaluation'
     eid = db.Column(db.Integer, primary_key = True)
-    stuName = db.Column(db.String(20), nullable = False)
     typeName = db.Column(db.String(20), nullable = False, unique=True)
     totalMark = db.Column(db.Integer)
     stuMark = db.Column(db.Integer)
-    remarkReq = db.Column(db.Boolean)
-    remarkText = db.Column(db.String(200), nullable=False)
-    student_username = db.Column(db.Integer, db.ForeignKey('Person.username'), nullable = False)
-    instructor_username = db.Column(db.Integer, db.ForeignKey('Person.username'), nullable = False)
+    remarkText = db.Column(db.String(200))
+    student_username = db.Column(db.String(20), db.ForeignKey('Person.username'), nullable = False)
+    stuName = db.Column(db.String(20), db.ForeignKey('Person.name'), nullable = False)
 
     def __repr__(self):
         return f"Evaluation('{self.typeName}', '{self.stuMark}')"
@@ -73,11 +71,20 @@ def register():
         name = request.form['realName']
         username = request.form['Username']
         email = request.form['Email']
+
+        if not name or not username or not email or not request.form['Password']:
+            flash('Please enter the information required!', 'message')
+            return render_template('register.html')
+
         hashed_password = bcrypt.generate_password_hash(request.form['Password']).decode('utf-8')
         
-        # if (username in setStu) or (username in setIns):
-        #     flash('There is already a same username existing.')
-        #     return redirect(url_for('login'))
+        if Person.query.filter_by(email = email).first():
+            flash('Email address already existed! Please enter a new email!', 'error')
+            return render_template('register.html')
+        
+        if Person.query.filter_by(username = username).first():
+            flash('Username already existed! Please enter a new username!', 'error')
+            return render_template('register.html')
 
         reg_details =(
             typePerson,
@@ -88,7 +95,6 @@ def register():
             hashed_password
         )
         add_users(reg_details)
-
         flash('Registration Successful! Please login now.')
         return redirect(url_for('login'))
 
@@ -154,6 +160,18 @@ def feedback():
          return render_template("feedback.html", feedback_for_instructor = feedback_for_instructor)
     # query_feedbacks_result
 
+@app.route("/teacherGrade", methods = ['GET', 'POST'])
+def teacherGrade():
+    return render_template("teacherGrade.html")
+
+@app.route("/evaluation", methods = ['GET', 'POST'])
+def evaluation():
+    if request.method == 'GET':
+        return render_template("evaluation.html")
+    else:
+        return render_template("evaluation.html")
+
+
 # information from assignment2
 @app.route("/test")
 def test():
@@ -183,13 +201,8 @@ def assignment():
 def courseteam():
     return render_template("courseteam.html")
 
-@app.route("/evaluation")
-def evaluation():
-    return render_template("evaluation.html")
 
-@app.route("/teacherGrade")
-def teacherGrade():
-    return render_template("teacherGrade.html")
+
 
 # helper function to add users to the database
 def add_users(reg_details):
