@@ -13,11 +13,14 @@
 {% endfor %}  -->
 <br>
 <div class = "feedbacks">
+    <p>
+       Students' Feeback for instructor: 
+    </p>
     <ul>
-    {% for Feedbacks in feedback_for_instructor %}
-        <li> {{ Feedbacks.feedbackText }} </li>
+        {% for Feedbacks in feedback_for_instructor %}
+            <li> {{ Feedbacks.feedbackText }} </li>
+        {% endfor %}
     </ul>
-    {% endfor %}
 </div>
 
 {% endblock %}
