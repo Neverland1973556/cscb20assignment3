@@ -1,3 +1,4 @@
+
 from datetime import datetime, timedelta
 from flask import Flask, render_template, url_for, flash, redirect, request, session
 from flask_sqlalchemy import SQLAlchemy
@@ -33,11 +34,12 @@ class Person(db.Model):
 class Evaluation(db.Model):
     __tablename__ = 'Evaluation'
     eid = db.Column(db.Integer, primary_key = True)
-    typeName = db.Column(db.String(20), nullable = False, unique=True)
-    totalMark = db.Column(db.Integer)
     stuMark = db.Column(db.Integer)
     remarkText = db.Column(db.String(200))
+
     student_username = db.Column(db.String(20), db.ForeignKey('Person.username'), nullable = False)
+    typeName = db.Column(db.String(20), db.ForeignKey('Assignment.assignment_name'), nullable = False)
+    total_mark = db.Column(db.Integer, db.ForeignKey('Assignment.total_mark'), nullable = False)
     stuName = db.Column(db.String(20), db.ForeignKey('Person.name'), nullable = False)
 
     def __repr__(self):
@@ -51,7 +53,16 @@ class Feedback(db.Model):
     instructor_username= db.Column(db.Integer, db.ForeignKey('Person.username'), nullable = False)
 
     def __repr__(self):
-        return f"Evaluation('{self.student_id}', '{self.instructor_id}')"
+        return f"Feedback('{self.student_id}', '{self.instructor_id}')"
+
+class Assignment(db.Model):
+    __tablename__ = 'Assignment'
+    aid = db.Column(db.Integer, primary_key = True)
+    assignment_name = db.Column(db.String(20), nullable = False, unique=True)
+    total_mark = db.Column(db.Integer, nullable = False)
+
+    def __repr__(self):
+        return f"Assignment('{self.assignment_name}', '{self.total_mark}')"
 
 # home page, press home to go back here
 @app.route("/")
@@ -94,8 +105,12 @@ def register():
             email,
             hashed_password
         )
-        add_users(reg_details)
-        flash('Registration Successful! Please login now.')
+        if typePerson == '0':
+            add_students(reg_details)
+            flash('Student Registration Successful! Please login now.')
+        else:
+            add_users(reg_details)
+            flash('Instructor Registration Successful! Please login now.')
         return redirect(url_for('login'))
 
 # login page
@@ -119,7 +134,6 @@ def login():
             # if int(typePerson) == 0:
             # # When it is a student
             #     setStu.add(username)
-            print(person.typePerson)
             if person.typePerson == 1:
                 session['type'] = 1
             else:
@@ -133,8 +147,6 @@ def logout():
     session.pop('name', default = None)
     flash('You have successfully logged out! Now you can login or register!')
     return redirect(url_for('home'))
-
-
 
 @app.route("/anonfeedback", methods = ['GET', 'POST'])
 def anonfeedback():
@@ -166,11 +178,15 @@ def teacherGrade():
 
 @app.route("/evaluation", methods = ['GET', 'POST'])
 def evaluation():
+    username = session['name']
+    student_marks = query_student_marks(username)
     if request.method == 'GET':
-        return render_template("evaluation.html")
+        return render_template("evaluation.html", query_student_marks = student_marks)
     else:
-        return render_template("evaluation.html")
-
+        text = request.form['remark_Text']
+        eid = request.form['eid']
+        add_remark_text(text, eid)
+        return redirect(url_for('evaluation'))
 
 # information from assignment2
 @app.route("/test")
@@ -203,16 +219,29 @@ def courseteam():
 
 
 
-
 # helper function to add users to the database
 def add_users(reg_details):
     instructor = Person(typePerson = reg_details[0], name = reg_details[1], username= reg_details[2], email = reg_details[3], password = reg_details[4])
     db.session.add(instructor)
     db.session.commit()
+
+def add_students(reg_details):
+    instructor = Person(typePerson = reg_details[0], name = reg_details[1], username= reg_details[2], email = reg_details[3], password = reg_details[4])
+    db.session.add(instructor)
+    # if it's a student, update the evaluation
+    for assignment in db.session.query(Assignment).order_by(Assignment.aid): 
+        mark = Evaluation(stuName = reg_details[1],stuMark = 0, student_username = reg_details[2], typeName = assignment.assignment_name, total_mark = assignment.total_mark)
+        db.session.add(mark)
+    db.session.commit()
+
     
 def add_feedbacks(feedback_details):
     feedback = Feedback(instructor_username = feedback_details[0], feedbackText = feedback_details[1])
     db.session.add(feedback)
+    db.session.commit()
+    
+def add_remark_text(text_to_remark, eid):
+    db.session.query(Evaluation).filter(Evaluation.eid == eid ).update({'remarkText': text_to_remark})
     db.session.commit()
 
 def query_instructors():
@@ -222,6 +251,10 @@ def query_instructors():
 def query_instructors_see(username):
     query_instructor = db.session.query(Feedback).filter(Feedback.instructor_username == username)
     return query_instructor
+
+def query_student_marks(username):
+    student_marks = db.session.query(Evaluation).filter(Evaluation.student_username == username)
+    return student_marks
 
 if __name__ == "__main__":
     app.run(debug=True)
