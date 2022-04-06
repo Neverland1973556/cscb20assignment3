@@ -30,7 +30,7 @@
                     {% if session.type == 0 %}
                         <!-- student -->
                         <h3><a href="{{ url_for('anonfeedback') }}">Anon Feedback</a></h3>
-                        <h3><a href="{{ url_for('evaluation') }}">Evaluation</a></h3>
+                        <h3><a href="{{ url_for('evaluation') }}">My Grade</a></h3>
                     {% else %}
                         <!-- teacher -->
                         <h3><a href="{{ url_for('feedback') }}">Feedback</a></h3>

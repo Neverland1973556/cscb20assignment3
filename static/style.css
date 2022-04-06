@@ -356,11 +356,6 @@
 		height: 300px;
 	}
 
-	#test {
-		flex: 1;
-
-	}
-
 	/* remark page container for student -> id */
 	#student_remark_container {
 		display: flex;
@@ -834,6 +829,54 @@
 		font-size: 14px;
 	}
 
+	img {
+		width: 85%;
+	}
+
+	iframe {
+		width: 100%;
+		height: 400px;
+	}
+
+	input::placeholder {
+		color: rgb(43, 37, 37);
+	}
+
+	input:focus,
+	textarea:focus,
+	select:focus {
+		border-color: rgb(42, 202, 154);
+	}
+
+	button {
+		font-size: 14px;
+		font-weight: 600;
+		text-transform: uppercase;
+		padding: 15px 26px;
+		color: #FFF;
+		background-color: rgb(42, 202, 154);
+		border-radius: 4px;
+		border: 1px solid rgb(42, 202, 154);
+		border-left-style: solid;
+		text-align: center;
+		width: 100%;
+	}
+
+	button:hover {
+		background-color: rgb(42, 170, 154);
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	label {
+		display: block;
+		line-height: 24px;
+		font-size: 14px;
+		font-weight: 400;
+		margin-bottom: 4px;
+		text-align: center;
+	}
+
 	.container {
 		display: flex;
 		flex-flow: row wrap;
@@ -841,8 +884,7 @@
 	}
 
 	.heading {
-		flex: 100%;
-
+		flex: 1 100%;
 		color: #FFFFFF;
 		background-color: #12beb6;
 		width: 100%;
@@ -858,6 +900,12 @@
 		font-weight: bold;
 		font-style: oblique;
 		margin-bottom: 1%;
+	}
+
+	.leftNavigation {
+		justify-content: center;
+		flex-grow: 1;
+		flex: 100%;
 	}
 
 	.leftNavigation ul {
@@ -888,7 +936,6 @@
 		text-decoration: none;
 	}
 
-
 	.leftNavigation a {
 		text-decoration: none;
 	}
@@ -914,32 +961,66 @@
 		margin-right: 5%;
 	}
 
-
 	.content p {
 		padding-left: 20px;
 		font-size: 14px;
 		margin-bottom: 3%;
 	}
 
-	img {
-		width: 85%;
-	}
-
-	iframe {
-		width: 100%;
-		height: 400px;
-	}
-
 	.note li {
 		margin-bottom: 3px;
 	}
 
+	/* the container for the marking page */
+	.container_li {
+		justify-content: center;
+		align-items: center;
+	}
+
+	/* contain of marking page */
+	.li_flex {
+		font-style: italic;
+		margin-right: 5%;
+	}
+	
+	.teacher_grade_css button{
+		width: 154px;
+		font-size: 14px;
+		font-weight: 600;
+		background-color: #4388e4;
+		border-color: #4388e4;
+		border-radius: 4px;
+		text-transform: uppercase;
+		width: auto;
+		padding: 2px 5px;
+		font-size: 14px;
+		height: 25px;
+	}
+	.teacher_grade_css input{
+		background-color: #ffffff;
+		border: 1px solid #e5e5e4;
+		font-size: 14px;
+		height: auto;
+		height: 25px;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+
+	}
+	input::placeholder{
+		color:rgb(128, 128, 128);
+	}
+
+	button:hover {
+		background-color: rgb(59, 85, 230);
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
 	.footer {
-		margin-top: 10%;
+		margin-top: 25%;
 		margin-bottom: 1%;
 		flex: 1 100%;
 		text-align: center;
-		font-size: 16px;
+		font-size: 14px;
 		color: grey;
 		font-family: sans-serif;
 	}
@@ -950,28 +1031,111 @@
 		font-family: sans-serif;
 	}
 
-	#form_text {
-		flex: 100%;
-		justify-self: center;
-		color: blue;
-		font-size: 20px;
-		width: 250px;
-		height: 85px;
+	.login_css {
+		max-width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 15px;
+		border: 1px solid rgb(42, 202, 154);
+	}
+	.login_css input,
+	.login_css textarea,
+	.login_css select {
+		background-color: #ffffff;
+		border: 1px solid #e5e5e4;
+		font-size: 16px;
+		height: auto;
+		outline: 0;
+		height: 48px;
+		width: 100%;
+		color: #282b2d;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+		margin-bottom: 16px;
+		transition: all .2s ease;
+		text-align: center;
+	}
+	.login_css button:hover{
+		background-color: rgb(39, 151, 104);
+		font-style: oblique;
+		font-weight: bolder;
 	}
 
-	#form_button {
-		margin-top: 2%;
-		flex: 100%;
-		color: white;
-		background-color: rgb(42, 202, 154);
-		border-left-style: solid;
-		border-left-color: greenyellow;
-		font-size: 14px;
-		width: 55px;
+	/* css for flash information */
+	.welcome {
+		text-align: center;
+	}
+
+	.welcome h3 {
+		margin-bottom: 20px;
+	}
+
+	.feedbacks li {
+		max-width: 250px;
+	}
+
+	.all_marks {
+		align-items: center;
+	}
+
+
+	/* remark page container for student -> id */
+	#student_remark_container {
+		margin-bottom: 10px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	#remark_info {
+		flex: 2;
+		font-style: italic;
+	}
+
+	#remark_button {
+		flex: 3;
+	}
+
+	.evaluation_css {
+		max-width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 16px;
+		border: 1px solid rgb(42, 202, 154);
+	}
+
+	.evaluation_css textarea,
+	.evaluation_css select {
+		background-color: #ffffff;
+		border: 1px solid #e5e5e4;
+		font-size: 16px;
+		height: auto;
+		outline: 0;
+		height: 100px;
+		width: 100%;
+		color: #282b2d;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+		margin-bottom: 8px;
+		transition: all .2s ease;
+		text-align: center;
+	}
+
+	.evaluation_css h3 {
+		margin-bottom: 5px;
+	}
+
+
+	/* some special case*/
+
+	#instructors {
 		height: 25px;
+		font-size: 14px;
 	}
 
-	.team {
+	#feedback_textarea {
+		height: 80px;
+	}
+
+
+	#team {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -979,42 +1143,9 @@
 		text-align: center;
 	}
 
-	.team img {
+	#team img {
 		width: 120px;
 		height: 160px;
 	}
 
-	.test {
-		flex: 1;
-
-	}
-
-	#form {
-		flex: 100%;
-		justify-content: center;
-		position: relative;
-		margin-top: 1%;
-	}
-
-	#form_text {
-		flex: 100%;
-		justify-self: center;
-		color: blue;
-		font-size: 16px;
-		width: 85%;
-		height: 65px;
-	}
-
-
-	#form_button {
-		margin-top: 2%;
-		flex: 100%;
-		color: white;
-		background-color: rgb(42, 202, 154);
-		border-left-style: solid;
-		border-left-color: greenyellow;
-		font-size: 16px;
-		width: 70px;
-		height: 40px;
-	}
 }
