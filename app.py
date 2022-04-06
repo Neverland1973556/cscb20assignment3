@@ -182,6 +182,7 @@ def teacherGrade():
         mark = request.form['stuMark']
         eid = request.form['eid']
         add_mark(mark, eid)
+        flash('Mark has been successfully added!')
         return redirect(url_for('teacherGrade'))
 
 @app.route("/evaluation", methods = ['GET', 'POST'])
@@ -195,6 +196,7 @@ def evaluation():
         text = request.form['remark_Text']
         eid = request.form['eid']
         add_remark_text(text, eid)
+        flash('Remark request has been successfully added!')
         return redirect(url_for('evaluation'))
 
 # information from assignment2
