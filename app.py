@@ -38,6 +38,8 @@ class Evaluation(db.Model):
     eid = db.Column(db.Integer, primary_key = True)
     stuMark = db.Column(db.Integer)
     remarkText = db.Column(db.String(200))
+    # if this is 0, not solved, 1 solved, set to 1
+    remark_signal = db.Column(db.Boolean)
 
     student_username = db.Column(db.String(20), db.ForeignKey('Person.username'), nullable = False)
     typeName = db.Column(db.String(20), db.ForeignKey('Assignment.assignment_name'), nullable = False)
@@ -196,6 +198,12 @@ def teacherGrade():
             flash('Mark has been successfully added!')
             return redirect(url_for('teacherGrade'))
 
+@app.route("/allmarks", methods = ['GET', 'POST'])
+def allmarks():
+    get_student_marks = query_all_student_marks_all()
+    if request.method == 'GET':
+        return render_template("allmarks.html", query_all_student_mark_all = get_student_marks)
+
 @app.route("/evaluation", methods = ['GET', 'POST'])
 def evaluation():
     username = session['name']
@@ -255,7 +263,7 @@ def add_students(reg_details):
     db.session.add(instructor)
     # if it's a student, update the evaluation
     for assignment in db.session.query(Assignment).order_by(Assignment.aid): 
-        mark = Evaluation(stuName = reg_details[1], stuMark = 0, student_username = reg_details[2], typeName = assignment.assignment_name, total_mark = assignment.total_mark)
+        mark = Evaluation(stuName = reg_details[1], stuMark = 0, student_username = reg_details[2], typeName = assignment.assignment_name, total_mark = assignment.total_mark, remark_signal = 0, remarkText = 'No Grade Yet')
         db.session.add(mark)
     db.session.commit()
 
@@ -266,11 +274,11 @@ def add_feedbacks(feedback_details):
     db.session.commit()
     
 def add_remark_text(text_to_remark, eid):
-    db.session.query(Evaluation).filter(Evaluation.eid == eid ).update({'remarkText': text_to_remark})
+    db.session.query(Evaluation).filter(Evaluation.eid == eid ).update({'remarkText': text_to_remark, 'remark_signal': 0})
     db.session.commit()
 
 def add_mark(mark, eid):
-    db.session.query(Evaluation).filter(Evaluation.eid == eid ).update({'stuMark': mark})
+    db.session.query(Evaluation).filter(Evaluation.eid == eid ).update({'stuMark': mark, 'remark_signal': 1})
     db.session.commit()
 
 def query_instructors():
@@ -286,6 +294,10 @@ def query_student_marks(username):
     return student_marks
 
 def query_all_student_marks():
+    student_marks = db.session.query(Evaluation).filter(Evaluation.remark_signal == 0)
+    return student_marks
+
+def query_all_student_marks_all():
     student_marks = db.session.query(Evaluation)
     return student_marks
 

@@ -24,11 +24,17 @@
     <div class = "evaluations">
         <ul>
             {% for Evaluations in query_student_marks %}
-            <li> {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }}  </li>
+            <li> {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }}
+              {% if Evaluations.remark_signal == 0 %}
+              <strong>Remark Status: </strong>Not Remark Yet
+            {% else %}
+              <strong>Remark Status: </strong>Already Remarked
+            {% endif %}  </li>
+
             <label for="remark_req">remark request</label>
             <form class = "login_css" action="http://127.0.0.1:5000/evaluation" method="post">
                 <input id = "eid" name="eid"  value = {{ Evaluations.eid }} readonly hidden></input>
-                <textarea id="remark_Text" name="remark_Text">{{ Evaluations.remarkText }}</textarea>
+                <textarea id="remark_Text" name="remark_Text" placeholder= "{{ Evaluations.remarkText }}""></textarea>
                 <button type="Remark">Remark</button>
             </form>
             {% endfor %}

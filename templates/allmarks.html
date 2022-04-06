@@ -1,0 +1,39 @@
+{% extends "template.html" %}
+
+{% block head %}
+<title> All Marks </title>
+{% endblock %}
+
+{% block content %}
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
+    {% if session.type == 1 %}
+    <div class = "grade">
+        <ul>
+            {% for Evaluations in query_all_student_mark_all %}
+            <li class = "all_marks">
+                  <strong>Assignment Name: </strong>{{ Evaluations.typeName }},
+                  &nbsp&nbsp<strong>Student Name: </strong>{{ Evaluations.stuName }}, 
+                  &nbsp&nbsp<strong>Student Username: </strong>{{ Evaluations.student_username }},
+                  &nbsp&nbsp<strong>Student Mark: </strong>{{ Evaluations.stuMark }}, 
+                  &nbsp&nbsp<strong>Total Mark: </strong>{{ Evaluations.total_mark }},
+                  &nbsp&nbsp
+                  {% if Evaluations.remark_signal == 0 %}
+                    <strong>Remark Status: </strong>Not Remark Yet
+                  {% else %}
+                    <strong>Remark Status: </strong>Already Remarked
+                  {% endif %}
+                
+                <br></br>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+    {% else %}
+    <p>Access Denied</p>
+    {% endif %}
+{% endif %}
+{% endblock %}
+

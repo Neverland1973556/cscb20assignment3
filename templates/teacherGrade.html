@@ -1,7 +1,7 @@
 {% extends "template.html" %}
 
 {% block head %}
-<title> Class Grades </title>
+<title> Remarks </title>
 {% endblock %}
 
 {% block content %}
@@ -29,7 +29,14 @@
                     <strong>Assignment Name: </strong>{{ Evaluations.typeName }}
                     <br>
                     <strong>Student Mark: </strong>{{ Evaluations.stuMark }}, 
-                    &nbsp&nbsp<strong>Total Mark: </strong>{{ Evaluations.total_mark }}, 
+                    &nbsp&nbsp<strong>Total Mark: </strong>{{ Evaluations.total_mark }}
+                    <br>
+                    {% if Evaluations.remark_signal == 0 %}
+                    <strong>Remark Status: </strong>Not Remark Yet
+                  {% else %}
+                    <strong>Remark Status: </strong>Already Remarked
+                  {% endif %}
+                    &nbsp&nbsp<strong>Remark Text: </strong>{{ Evaluations.remarkText }}
  
                     <br></br>
                 </div>

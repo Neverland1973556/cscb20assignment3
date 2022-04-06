@@ -1,4 +1,4 @@
-@media (min-width: 150px) {
+@media (min-width: 950px) {
 	body {
 		background-image: url(./sub/a14.jpg);
 		background-repeat: no-repeat;
@@ -336,6 +336,11 @@
 
 	.feedbacks h3 {
 		text-align: center;
+	}
+
+	.all_marks{
+		align-items: center;
+		
 	}
 
 }
