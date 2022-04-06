@@ -23,14 +23,15 @@
             {% for Evaluations in query_all_student_mark %}
             <li class = "container_li">
                 <div class ="li_flex">
-                    <strong>Assignment Name: </strong>{{ Evaluations.typeName }},
-                    &nbsp&nbsp<strong>Student Name: </strong>{{ Evaluations.stuName }}, 
+                    <strong>Student Name: </strong>{{ Evaluations.stuName }}, 
                     &nbsp&nbsp<strong>Student Username: </strong>{{ Evaluations.student_username }} 
+                    <br>
+                    <strong>Assignment Name: </strong>{{ Evaluations.typeName }}
                     <br>
                     <strong>Student Mark: </strong>{{ Evaluations.stuMark }}, 
                     &nbsp&nbsp<strong>Total Mark: </strong>{{ Evaluations.total_mark }}, 
-                    <br> 
-                    <strong>Student's Remark Text: </strong>{{ Evaluations.remarkText }}
+ 
+                    <br></br>
                 </div>
             
             
@@ -40,6 +41,7 @@
                     <input class = "grade_input" name="stuMark" placeholder="Remark to:"></input>
                     <button type="Remark">Remark</button>
                 </form>
+                <br></br>
             </li>
             {% endfor %}
         </ul>
