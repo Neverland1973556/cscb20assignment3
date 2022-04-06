@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
 <h2>Midterm</h2>
 <p>There will be one midterm. The midterm will be 75min in length. You should go to either HW215 or HW216
     depending on your last name as
@@ -23,4 +25,5 @@
         target="_blank">Term Test</a>
 </p>
 
+{% endif %}
 {% endblock %}

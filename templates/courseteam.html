@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
 <div class="team">
     <div class="test">
         <p><img src="/static/sub/peijia.jpg"><br>Instructor: Peijia Guo</p>
@@ -23,4 +25,6 @@
         <p><i>"But first, coffee!"</i></p><br>
     </div>
 </div>
+
+{% endif %}
 {% endblock %}

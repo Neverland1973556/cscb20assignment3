@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
 <div class="note">
     <h2>Overview</h2>
     <p>
@@ -45,4 +47,6 @@
     return?<br>
     A. Return the first name, last name. <br><br>
 </p>
+
+{% endif %}
 {% endblock %}

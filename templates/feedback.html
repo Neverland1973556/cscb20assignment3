@@ -6,7 +6,9 @@
 
 {% block content %}
 
-
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
 
 <!-- {% for Notes in query_notes_result %}
  <p> {{ Notes }} </p>
@@ -27,4 +29,5 @@
     </ul>
 </div>
 
+{% endif %}
 {% endblock %}

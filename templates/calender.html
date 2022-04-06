@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block content %}
-
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
 <iframe
     src="https://calendar.google.com/calendar/embed?src=00u4gugfgable3ifa38mviqgao%40group.calendar.google.com&ctz=America%2FToronto"></iframe>
+{% endif %}
 {% endblock %}

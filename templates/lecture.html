@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
 
 <h1>
     Lecture Schedule
@@ -31,4 +33,5 @@
         <li>Week 12 - <a href="/static/sub/dummy.pdf" target="_blank">Practice Final</a> - Last Year's final</li>
     </ul>
 </div>
+{% endif %}
 {% endblock %}

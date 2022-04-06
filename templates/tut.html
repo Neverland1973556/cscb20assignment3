@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
 <h2>Tutorial Sections</h2>
 <p>Please go the tutorial section that you signed up for on ROSI. </p>
 <h2>Tutorial Exercises</a></h2>
@@ -57,4 +59,5 @@
         </li>
     </ul>
 </div>
+{% endif %}
 {% endblock %}

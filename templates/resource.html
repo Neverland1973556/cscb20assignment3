@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
 <h2>Online Resources</h2>
 
 <div class="note">
@@ -66,4 +68,5 @@
 
     </li>
 </ul>
+{% endif %}
 {% endblock %}

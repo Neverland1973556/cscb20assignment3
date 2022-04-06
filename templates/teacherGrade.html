@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
 <div class = "evaluations">
     <ul>
         {% for Evaluations in query_all_student_mark %}
@@ -21,5 +23,6 @@
 
 </div>
 
+{% endif %}
 {% endblock %}
 
