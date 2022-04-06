@@ -134,9 +134,6 @@ def login():
             return render_template('login.html')
         else:
             session['name'] = username
-            # if int(typePerson) == 0:
-            # # When it is a student
-            #     setStu.add(username)
             if person.typePerson == 1:
                 session['type'] = 1
             else:
@@ -269,13 +266,20 @@ def courseteam():
 
 # helper function to add users to the database
 def add_users(reg_details):
+    """
+    This function add a new instructor user with information reg_details. Instructors will have typePerson as 1.
+    """
     instructor = Person(typePerson = reg_details[0], name = reg_details[1], username= reg_details[2], email = reg_details[3], password = reg_details[4])
     db.session.add(instructor)
     db.session.commit()
 
 def add_students(reg_details):
-    instructor = Person(typePerson = reg_details[0], name = reg_details[1], username= reg_details[2], email = reg_details[3], password = reg_details[4])
-    db.session.add(instructor)
+    """
+    This function add a new student user with information reg_details. Students will have typePerson as 0.
+    The default of a student's mark in all evluations is set to zero.
+    """
+    student = Person(typePerson = reg_details[0], name = reg_details[1], username= reg_details[2], email = reg_details[3], password = reg_details[4])
+    db.session.add(student)
     # if it's a student, update the evaluation
     for assignment in db.session.query(Assignment).order_by(Assignment.aid): 
         mark = Evaluation(stuName = reg_details[1], stuMark = 0, student_username = reg_details[2], typeName = assignment.assignment_name, total_mark = assignment.total_mark, remark_signal = 0, remarkText = 'No Grade Yet')
@@ -284,43 +288,61 @@ def add_students(reg_details):
 
     
 def add_feedbacks(feedback_details):
+    """
+    This function adds a piece of feedback with information feedback_details.
+    """
     feedback = Feedback(instructor_username = feedback_details[0], feedbackText = feedback_details[1])
     db.session.add(feedback)
     db.session.commit()
     
 def add_remark_text(text_to_remark, eid):
+    """
+    This function adds a student's remark text text_to_remark into the database.
+    """
     db.session.query(Evaluation).filter(Evaluation.eid == eid ).update({'remarkText': text_to_remark, 'remark_signal': 0})
     db.session.commit()
 
 def add_mark(mark, eid):
+    """
+    This function updates a student's mark to mark for an evaluation with eid as eid.
+    """
     db.session.query(Evaluation).filter(Evaluation.eid == eid ).update({'stuMark': mark, 'remark_signal': 1})
     db.session.commit()
 
 def query_instructors():
+    """
+    This function gets all instructors. Instructors will have typePerson as 1.
+    """
     query_instructor = db.session.query(Person).filter(Person.typePerson == 1)
     return query_instructor
 
 def query_instructors_see(username):
+    """
+    This function gets all feedback for instructor with username as username.
+    """
     query_instructor = db.session.query(Feedback).filter(Feedback.instructor_username == username)
     return query_instructor
 
 def query_student_marks(username):
+    """
+    This function gets the mark from sutdent with username as username.
+    """
     student_marks = db.session.query(Evaluation).filter(Evaluation.student_username == username)
     return student_marks
 
 def query_all_student_marks():
+    """
+    This function gets all marks from all students.
+    """
     student_marks = db.session.query(Evaluation).filter(Evaluation.remark_signal == 0)
     return student_marks
 
 def query_all_student_marks_all():
+    """
+    This function gets all marks from all students.
+    """
     student_marks = db.session.query(Evaluation)
     return student_marks
-
-# def is_float_int(input: int) -> bool:
-#     if not input.isalnum():
-#         return False
-#     elif input.isalpha():
-#         return False
 
 
 
