@@ -9,6 +9,15 @@
 <p>Access Denied</p>
 {% else %}
     {% if session.type == 0 %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class = "welcome">
+            <h3> {{ message }} </h3>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
     <!-- {% for Notes in query_notes_result %}
     <p> {{ Notes }} </p>
     {% endfor %}  -->
@@ -18,7 +27,7 @@
             <li> {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }}  </li>
             <label for="remark_req">remark request</label>
             <form action="http://127.0.0.1:5000/evaluation" method="post">
-                <input id = "eid" name="eid"  value = {{ Evaluations.eid }} readonly></input>
+                <input id = "eid" name="eid"  value = {{ Evaluations.eid }} readonly hidden></input>
                 <textarea id="remark_Text" name="remark_Text">{{ Evaluations.remarkText }}</textarea>
                 <button type="Remark">Remark</button>
             </form>

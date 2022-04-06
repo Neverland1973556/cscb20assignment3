@@ -4,35 +4,47 @@
 <title> Anon Feedback </title>
 {% endblock %}
 
-
 {% block content %}
+
 {% if not session.name %}
-<p>Access Denied</p>
+  <p>Access Denied</p>
 {% else %}
   {% if session.type == 0 %}
-  <form action="http://127.0.0.1:5000/anonfeedback" method = "post">
-    <p>
-    (a)  What do you like about the instructor teaching? 
-    <br></br>
-    (b)  What do you recommend the instructor to do to improve their teaching? 
-    <br></br>
-    (c)  What do you like about the labs? 
-    <br></br>
-    (d)  What do you recommend the lab instructors to do to improve their lab teaching? 
-    </p>
-    <h3>Instructors</h3>
-    <select name="instructors" id="instructors">
-      {% for Person in query_instructors_all %}
-      <option value="{{ Person.username }}">Instructor Name: {{ Person.name }} / Username: {{ Person.username }}  </option>
-      {% endfor %} 
-    </select>
-    <br><br>
-    <textarea type="text" name="todo-input" placeholder="Enter your feedback here" id="form_text"></textarea>
-    <br>
-    <button type="Submit">Submit</button>
-  </form>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class = "welcome">
+            <h3> {{ message }} </h3>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="http://127.0.0.1:5000/anonfeedback" method = "post">
+      <p>
+      Questions you might have: 
+      <br>
+      (a)  What do you like about the instructor teaching? 
+      <br>
+      (b)  What do you recommend the instructor to do to improve their teaching? 
+      <br>
+      (c)  What do you like about the labs? 
+      <br>
+      (d)  What do you recommend the lab instructors to do to improve their lab teaching? 
+      </p>
+      <h3><strong>Instructors</strong></h3>
+      <select name="instructors" id="instructors">
+        {% for Person in query_instructors_all %}
+          <option value="{{ Person.username }}">Instructor Name: {{ Person.name }} / Username: {{ Person.username }}  </option>
+        {% endfor %} 
+      </select>
+      <br>
+      <textarea type="text" name="todo-input" placeholder="Enter your feedback here" id="form_text"></textarea>
+      <br>
+      <button type="Submit">Submit</button>
+    </form>
   {% else %}
-  <p>Access Denied</p>
+    <p>Access Denied</p>
   {% endif %}
 {% endif %}
 {% endblock %}

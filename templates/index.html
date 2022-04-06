@@ -9,13 +9,18 @@
     {% if messages %}
       {% for message in messages %}
         <div class = "welcome">
-          <div>Welcome back <strong>{{ session.name }}!</strong> you are {{ message }}</div>
+          <h3>Welcome back <strong>{{ session.name }}!</strong> you are {{ message }}</h3>
         </div>
       {% endfor %}
     {% else %}
       <div class = "welcome">
         <h3>Welcome {{ session.name }} to B20 lecture notes!</h3>
-        <h3>eee{{ session.type }}eee</h3>
+        {% if session.type == 0 %}
+          <h3>Student Mode</h3>
+        {% else %}
+          <h3>Instructor Mode</h3>
+        {% endif %}
+        <h3></h3>
       </div>
     {% endif %}
 

@@ -4,9 +4,11 @@ from flask import Flask, render_template, url_for, flash, redirect, request, ses
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from sqlalchemy import text # textual queries
+import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret_key'
+secret_key = os.urandom(12).hex()
+app.config['SECRET_KEY'] = secret_key
 # set up the database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///a3database.db'
 # logout every 15 minutes
@@ -162,6 +164,7 @@ def anonfeedback():
             text_for_instructors
         )
         add_feedbacks(feedback_details)
+        flash('Feedback has been successfully added!')
         return redirect(url_for('anonfeedback'))
 
 @app.route("/feedback", methods = ['GET', 'POST'])
@@ -175,29 +178,36 @@ def feedback():
 @app.route("/teacherGrade", methods = ['GET', 'POST'])
 def teacherGrade():
     get_student_marks = query_all_student_marks()
-    print(get_student_marks)
     if request.method == 'GET':
         return render_template("teacherGrade.html", query_all_student_mark = get_student_marks)
     else:
         mark = request.form['stuMark']
-        eid = request.form['eid']
-        add_mark(mark, eid)
-        flash('Mark has been successfully added!')
-        return redirect(url_for('teacherGrade'))
+        # student_marks = db.session.query(Evaluation).filter(Evaluation.student_username == username)
+        if mark.isnumeric() != True or (int(mark) < 0):
+            flash('Invalid grade, please check again!')
+            return redirect(url_for('teacherGrade'))
+        else:
+            eid = request.form['eid']
+            add_mark(mark, eid)
+            flash('Mark has been successfully added!')
+            return redirect(url_for('teacherGrade'))
 
 @app.route("/evaluation", methods = ['GET', 'POST'])
 def evaluation():
     username = session['name']
     student_marks = query_student_marks(username)
-    print(student_marks)
     if request.method == 'GET':
         return render_template("evaluation.html", query_student_marks = student_marks)
     else:
         text = request.form['remark_Text']
-        eid = request.form['eid']
-        add_remark_text(text, eid)
-        flash('Remark request has been successfully added!')
-        return redirect(url_for('evaluation'))
+        if not text:
+            flash('Please enter your remark request!')
+            return redirect(url_for('evaluation'))
+        else:
+            eid = request.form['eid']
+            add_remark_text(text, eid)
+            flash('Remark request has been successfully added!')
+            return redirect(url_for('evaluation'))
 
 # information from assignment2
 @app.route("/test")
@@ -241,7 +251,7 @@ def add_students(reg_details):
     db.session.add(instructor)
     # if it's a student, update the evaluation
     for assignment in db.session.query(Assignment).order_by(Assignment.aid): 
-        mark = Evaluation(stuName = reg_details[1],stuMark = 0, student_username = reg_details[2], typeName = assignment.assignment_name, total_mark = assignment.total_mark)
+        mark = Evaluation(stuName = reg_details[1], stuMark = 0, student_username = reg_details[2], typeName = assignment.assignment_name, total_mark = assignment.total_mark)
         db.session.add(mark)
     db.session.commit()
 
