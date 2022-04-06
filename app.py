@@ -1,4 +1,3 @@
-
 from datetime import datetime, timedelta
 from flask import Flask, render_template, url_for, flash, redirect, request, session
 from flask_sqlalchemy import SQLAlchemy
@@ -6,7 +5,7 @@ from flask_bcrypt import Bcrypt
 from sqlalchemy import text # textual queries
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 secret_key = os.urandom(12).hex()
 app.config['SECRET_KEY'] = secret_key
 # set up the database
