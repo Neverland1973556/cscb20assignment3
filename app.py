@@ -3,11 +3,11 @@ from flask import Flask, render_template, url_for, flash, redirect, request, ses
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from sqlalchemy import text # textual queries
-import os
+#import os
 
 app = Flask(__name__, template_folder="templates")
-secret_key = os.urandom(12).hex()
-app.config['SECRET_KEY'] = secret_key
+#secret_key = os.urandom(12).hex()
+app.config['SECRET_KEY'] = "secret_key"
 # set up the database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///a3database.db'
 # logout every 15 minutes
