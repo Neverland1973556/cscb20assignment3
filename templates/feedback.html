@@ -9,25 +9,27 @@
 {% if not session.name %}
 <p>Access Denied</p>
 {% else %}
+    {% if session.type == 1 %}
+    <!-- {% for Notes in query_notes_result %}
+    <p> {{ Notes }} </p>
+    {% endfor %}  -->
+    <br>
+    <div class="feedbacks">
+        <p>
+            Students' Feedback for instructor
+            {% if session.name %}
+                {{ session.name }}:
+            {% endif %}
+        </p>
 
-<!-- {% for Notes in query_notes_result %}
- <p> {{ Notes }} </p>
-{% endfor %}  -->
-<br>
-<div class="feedbacks">
-    <p>
-        Students' Feedback for instructor
-        {% if session.name %}
-            {{ session.name }}:
-        {% endif %}
-    </p>
-
-    <ul>
-        {% for Feedbacks in feedback_for_instructor %}
-        <li> {{ Feedbacks.feedbackText }} </li>
-        {% endfor %}
-    </ul>
-</div>
-
+        <ul>
+            {% for Feedbacks in feedback_for_instructor %}
+            <li> {{ Feedbacks.feedbackText }} </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <p>Access Denied</p>
+    {% endif %}
 {% endif %}
 {% endblock %}

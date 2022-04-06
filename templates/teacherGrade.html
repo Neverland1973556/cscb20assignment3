@@ -8,21 +8,24 @@
 {% if not session.name %}
 <p>Access Denied</p>
 {% else %}
-<div class = "evaluations">
-    <ul>
-        {% for Evaluations in query_all_student_mark %}
-        <li> {{ Evaluations.stuName }} - {{ student_username }} - {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }} - {{ Evaluations.remarkText }}</li>
-        
-        <form action="http://127.0.0.1:5000/teacherGrade" method = "post">
-            <input id = "eid" name="eid"  value = {{ Evaluations.eid }} readonly></input>
-            <input id="stuMark" name="stuMark">{{ Evaluations.stuMark }}</input>
-            <button type="Remark">Remark</button>
-    </form>
-        {% endfor %}
-    </ul>
+    {% if session.type == 1 %}
+    <div class = "evaluations">
+        <ul>
+            {% for Evaluations in query_all_student_mark %}
+            <li> {{ Evaluations.stuName }} - {{ student_username }} - {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }} - {{ Evaluations.remarkText }}</li>
+            
+            <form action="http://127.0.0.1:5000/teacherGrade" method = "post">
+                <input id = "eid" name="eid"  value = {{ Evaluations.eid }} readonly></input>
+                <input id="stuMark" name="stuMark">{{ Evaluations.stuMark }}</input>
+                <button type="Remark">Remark</button>
+        </form>
+            {% endfor %}
+        </ul>
 
-</div>
-
+    </div>
+    {% else %}
+    <p>Access Denied</p>
+    {% endif %}
 {% endif %}
 {% endblock %}
 

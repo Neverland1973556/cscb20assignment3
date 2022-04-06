@@ -4,8 +4,13 @@
 <title> Anon Feedback </title>
 {% endblock %}
 
+
 {% block content %}
-<form action="http://127.0.0.1:5000/anonfeedback" method = "post">
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
+  {% if session.type == 0 %}
+  <form action="http://127.0.0.1:5000/anonfeedback" method = "post">
     <p>
     (a)  What do you like about the instructor teaching? 
     <br></br>
@@ -26,5 +31,9 @@
     <br>
     <button type="Submit">Submit</button>
   </form>
+  {% else %}
+  <p>Access Denied</p>
+  {% endif %}
+{% endif %}
 {% endblock %}
 
