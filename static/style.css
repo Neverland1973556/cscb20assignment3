@@ -216,33 +216,47 @@
 
 	}
 
-	.container_li{
+	.container_li {
 		display: flex;
 		flex-flow: row wrap;
+		margin-bottom: 5px;
+		justify-content: center;
+		align-items: center;
 	}
 
-	.li_flex{
+	.li_flex {
 		flex: 5;
-		font-style: italic;
-	}
 
+		font-style: italic;
+		margin-right: 5%;
+	}
 	.teacher_grade_css {
 		flex: 1;
 	}
 
-	.grade_input{
-		height: 30px;
-		width: 100%;
+	.grade_input {
+		height: 40px;
+		width: 150px;
+		padding: 0px;
 	}
+
 	.grade_input::placeholder {
 		color: rgb(128, 128, 128);
 	}
-	
-	.teacher_grade_css button{
+
+	.teacher_grade_css button {
+		width: 154px;
 		font-size: 14px;
 		font-weight: 600;
-		background-color: rgb(42, 202, 154);
+		background-color: #4388e4;
+		border-color: #4388e4;
 		border-radius: 4px;
+	}
+
+	.teacher_grade_css button:hover {
+		background-color: #2d6cbd;
+		font-style: oblique;
+		font-weight: bolder;
 	}
 
 	.login_css {
@@ -295,8 +309,9 @@
 		text-align: center;
 		width: 100%;
 	}
-	button:hover{
-		background-color:  rgb(42, 170, 154);
+
+	button:hover {
+		background-color: rgb(42, 170, 154);
 		font-style: oblique;
 		font-weight: bolder;
 	}
@@ -311,17 +326,18 @@
 		text-align: center;
 	}
 
-	.welcome{
+	.welcome {
 		text-align: center;
 	}
-	.welcome h3{
+
+	.welcome h3 {
 		margin-bottom: 20px;
 	}
 
-	.feedbacks h3{
+	.feedbacks h3 {
 		text-align: center;
 	}
-	
+
 }
 
 @media (min-width: 575px) and (max-width: 975px) {

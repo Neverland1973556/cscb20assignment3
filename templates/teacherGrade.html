@@ -26,7 +26,8 @@
                     <strong>Assignment Name: </strong>{{ Evaluations.typeName }},
                     &nbsp&nbsp<strong>Student Name: </strong>{{ Evaluations.stuName }}, 
                     &nbsp&nbsp<strong>Student Username: </strong>{{ Evaluations.student_username }} 
-                    &nbsp&nbsp<strong>Student Mark: </strong>{{ Evaluations.stuMark }}, 
+                    <br>
+                    <strong>Student Mark: </strong>{{ Evaluations.stuMark }}, 
                     &nbsp&nbsp<strong>Total Mark: </strong>{{ Evaluations.total_mark }}, 
                     <br> 
                     <strong>Student's Remark Text: </strong>{{ Evaluations.remarkText }}
@@ -34,7 +35,8 @@
             
             
                 <form class = "teacher_grade_css"action="http://127.0.0.1:5000/teacherGrade" method = "post">
-                    <input class = "grade_input" name="eid"  value = {{ Evaluations.eid }} readonly hidden></input>
+                    <input class = "grade_input" name="eid"  value = {{ Evaluations.eid }}  hidden></input>
+                    <input class = "grade_input" name="total_mark"  value = {{ Evaluations.total_mark}} hidden></input>
                     <input class = "grade_input" name="stuMark" placeholder="Remark to:"></input>
                     <button type="Remark">Remark</button>
                 </form>

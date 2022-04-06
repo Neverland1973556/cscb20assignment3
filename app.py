@@ -182,9 +182,13 @@ def teacherGrade():
         return render_template("teacherGrade.html", query_all_student_mark = get_student_marks)
     else:
         mark = request.form['stuMark']
+        total_mark = request.form['total_mark']
         # student_marks = db.session.query(Evaluation).filter(Evaluation.student_username == username)
         if mark.isnumeric() != True or (int(mark) < 0):
             flash('Invalid grade, please check again!')
+            return redirect(url_for('teacherGrade'))
+        if float(mark) > float(total_mark):
+            flash('Cannot exceed total mark, please check again!')
             return redirect(url_for('teacherGrade'))
         else:
             eid = request.form['eid']
@@ -284,6 +288,14 @@ def query_student_marks(username):
 def query_all_student_marks():
     student_marks = db.session.query(Evaluation)
     return student_marks
+
+# def is_float_int(input: int) -> bool:
+#     if not input.isalnum():
+#         return False
+#     elif input.isalpha():
+#         return False
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

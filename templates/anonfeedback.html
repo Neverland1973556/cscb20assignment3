@@ -20,9 +20,10 @@
       {% endif %}
     {% endwith %}
 
-    <form action="http://127.0.0.1:5000/anonfeedback" method = "post">
+    <form class="login_css" action="http://127.0.0.1:5000/anonfeedback" method = "post">
+      <h3>
+      Questions you might have: </h3>
       <p>
-      Questions you might have: 
       <br>
       (a)  What do you like about the instructor teaching? 
       <br>
@@ -33,6 +34,7 @@
       (d)  What do you recommend the lab instructors to do to improve their lab teaching? 
       </p>
       <h3><strong>Instructors</strong></h3>
+      <br>
       <select name="instructors" id="instructors">
         {% for Person in query_instructors_all %}
           <option value="{{ Person.username }}">Instructor Name: {{ Person.name }} / Username: {{ Person.username }}  </option>
