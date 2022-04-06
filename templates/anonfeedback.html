@@ -20,7 +20,7 @@
       {% endif %}
     {% endwith %}
 
-    <form class="login_css" action="http://127.0.0.1:5000/anonfeedback" method = "post">
+    <form class="evaluation_css" action="http://127.0.0.1:5000/anonfeedback" method = "post">
       <h3>
       Questions you might have: </h3>
       <p>
@@ -41,7 +41,7 @@
         {% endfor %} 
       </select>
       <br>
-      <textarea type="text" name="todo-input" placeholder="Enter your feedback here" id="form_text"></textarea>
+      <textarea type="text" name="todo-input" placeholder="Enter your feedback here" id = "feedback_textarea"></textarea>
       <br>
       <button type="Submit">Submit</button>
     </form>

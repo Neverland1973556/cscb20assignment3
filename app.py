@@ -75,7 +75,6 @@ class Assignment(db.Model):
 def home():
     return render_template("index.html")
 
-# todo: if empty info or wrong info, flash
 # register page
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
@@ -203,6 +202,22 @@ def allmarks():
     get_student_marks = query_all_student_marks_all()
     if request.method == 'GET':
         return render_template("allmarks.html", query_all_student_mark_all = get_student_marks)
+    else:
+        mark = request.form['stuMark']
+        total_mark = request.form['total_mark']
+        # student_marks = db.session.query(Evaluation).filter(Evaluation.student_username == username)
+        if mark.isnumeric() != True or (int(mark) < 0):
+            flash('Invalid grade, please check again!')
+            return redirect(url_for('allmarks'))
+        if float(mark) > float(total_mark):
+            flash('Cannot exceed total mark, please check again!')
+            return redirect(url_for('allmarks'))
+        else:
+            eid = request.form['eid']
+            add_mark(mark, eid)
+            flash('Mark has been successfully added!')
+            return redirect(url_for('allmarks'))
+
 
 @app.route("/evaluation", methods = ['GET', 'POST'])
 def evaluation():

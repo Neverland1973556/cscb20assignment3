@@ -7,6 +7,7 @@
 		color: #000000;
 		font-family: Geneva, Arial, Helvetica, sans-serif;
 		align-items: center;
+		overflow-wrap: break-word;
 	}
 
 	h1 {
@@ -40,6 +41,10 @@
 
 	a {
 		color: #9999cc;
+	}
+	a:hover{
+		font-style: oblique;
+		font-weight: bolder;
 	}
 
 	* {
@@ -171,34 +176,6 @@
 		font-family: sans-serif;
 	}
 
-	#form {
-		flex: 100%;
-		justify-content: center;
-		position: relative;
-		align-self: flex-end;
-	}
-
-	#form_text {
-		flex: 100%;
-		justify-self: center;
-		font-size: 20px;
-		width: 450px;
-		height: 85px;
-		color: purple;
-	}
-
-	#form_button {
-		margin-top: 2%;
-		flex: 100%;
-		color: white;
-		background-color: rgb(42, 202, 154);
-		border-left-style: solid;
-		border-left-color: greenyellow;
-		font-size: 22px;
-		width: 110px;
-		height: 50px;
-	}
-
 	.team {
 		display: flex;
 		justify-content: space-between;
@@ -217,21 +194,58 @@
 	}
 
 	.container_li {
+
 		display: flex;
-		flex-flow: row wrap;
+		flex-flow: row nowrap;
 		margin-bottom: 5px;
 		justify-content: center;
 		align-items: center;
 	}
 
 	.li_flex {
-		flex: 5;
-
+		flex: 3;
 		font-style: italic;
+		text-align: center;
 		margin-right: 5%;
 	}
 	.teacher_grade_css {
 		flex: 1;
+	}
+/* 
+	.container_all_marks {
+
+		display: flex;
+		flex-flow: row nowrap;
+		margin-bottom: 5px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.li_flex_all {
+		flex: 6;
+		font-style: italic;
+		margin-right: 5%;
+		text-align: center;
+	}
+	.teacher_grade_css_all {
+		flex: 1;
+	} */
+
+	#student_remark_container {
+		display: flex;
+		flex-flow: row wrap;
+		margin-bottom: 10px;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+
+	#remark_info{
+		flex: 2;
+		font-style: italic;
+	}
+	#remark_button {
+		flex: 3;
 	}
 
 	.grade_input {
@@ -267,6 +281,14 @@
 		border: 1px solid rgb(42, 202, 154);
 	}
 
+	.evaluation_css {
+		max-width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 16px;
+		border: 1px solid rgb(42, 202, 154);
+	}
+
 	.login_css input,
 	.login_css textarea,
 	.login_css select {
@@ -282,6 +304,32 @@
 		margin-bottom: 16px;
 		transition: all .2s ease;
 		text-align: center;
+	}
+
+	#instructors{
+		height: 48px;
+	}
+	.evaluation_css textarea,
+	.evaluation_css select {
+		background-color: #ffffff;
+		border: 1px solid #e5e5e4;
+		font-size: 16px;
+		height: auto;
+		outline: 0;
+		height: 100px;
+		width: 100%;
+		color: #282b2d;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+		margin-bottom: 8px;
+		transition: all .2s ease;
+		text-align: center;
+	}
+	.evaluation_css h3{
+		margin-bottom: 5px;
+	}
+
+	#feedback_textarea{
+		height: 100px;
 	}
 
 	input::placeholder {
@@ -334,8 +382,8 @@
 		margin-bottom: 20px;
 	}
 
-	.feedbacks h3 {
-		text-align: center;
+	.feedbacks li{
+		max-width: 700px;
 	}
 
 	.all_marks{

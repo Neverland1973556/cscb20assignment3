@@ -8,41 +8,50 @@
 {% if not session.name %}
 <p>Access Denied</p>
 {% else %}
-    {% if session.type == 0 %}
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-          <div class = "welcome">
-            <h3> {{ message }} </h3>
-          </div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-    <!-- {% for Notes in query_notes_result %}
+{% if session.type == 0 %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="welcome">
+  <h3> {{ message }} </h3>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<!-- {% for Notes in query_notes_result %}
     <p> {{ Notes }} </p>
     {% endfor %}  -->
-    <div class = "evaluations">
-        <ul>
-            {% for Evaluations in query_student_marks %}
-            <li> {{ Evaluations.typeName }} - {{ Evaluations.stuMark }} - {{ Evaluations.totalMark }}
-              {% if Evaluations.remark_signal == 0 %}
-              <strong>Remark Status: </strong>Not Remark Yet
-            {% else %}
-              <strong>Remark Status: </strong>Already Remarked
-            {% endif %}  </li>
-
-            <label for="remark_req">remark request</label>
-            <form class = "login_css" action="http://127.0.0.1:5000/evaluation" method="post">
-                <input id = "eid" name="eid"  value = {{ Evaluations.eid }} readonly hidden></input>
-                <textarea id="remark_Text" name="remark_Text" placeholder= "{{ Evaluations.remarkText }}""></textarea>
-                <button type="Remark">Remark</button>
-            </form>
-            {% endfor %}
-        </ul>
-    </div>
-    {% else %}
-    <p>Access Denied</p>
-    {% endif %}
+<div class="evaluations">
+  <ul>
+    {% for Evaluations in query_student_marks %}
+    <li id="student_remark_container">
+      <div id="remark_info">
+        <strong>Assignment Name: </strong>{{ Evaluations.typeName }}, <br>
+        <strong>Student Name: </strong>{{ Evaluations.stuName }}, <br>
+        <strong>Student Mark: </strong>{{ Evaluations.stuMark }}, <br>
+        <strong>Total Mark: </strong>{{ Evaluations.total_mark }}, <br>
+        {% if Evaluations.remark_signal == 0 %}
+        <strong>Remark Status: </strong>Not Remark Yet
+        {% else %}
+        <strong>Remark Status: </strong>Already Remarked
+        {% endif %}
+        <br>
+      </div>
+      <div id="remark_button">
+        
+        <form class="evaluation_css" action="http://127.0.0.1:5000/evaluation" method="post">
+          <h3>Send a Remark Request</h3>
+          <input id="eid" name="eid" value={{ Evaluations.eid }} readonly hidden></input>
+          <textarea id="remark_Text" name="remark_Text" placeholder="{{ Evaluations.remarkText }}"></textarea>
+          <button type="Remark">Send</button>
+        </form>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% else %}
+<p>Access Denied</p>
+{% endif %}
 {% endif %}
 {% endblock %}
-
