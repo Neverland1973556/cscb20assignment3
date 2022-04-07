@@ -2,7 +2,7 @@
 
 	/* basic define of the styles in computer view */
 	body {
-		background-color: #f6f5f2;
+		background-color: #F7CAC9;
 		color: #000000;
 		font-family: Geneva, Arial, Helvetica, sans-serif;
 		align-items: center;
@@ -385,7 +385,7 @@
 
 @media (min-width: 600px) and (max-width: 1200px) {
 	body {
-		background-color: #f6f5f2;
+		background-color: #F7CAC9;
 		color: #000000;
 		font-family: Geneva, Arial, Helvetica, sans-serif;
 		align-items: center;
@@ -764,7 +764,7 @@
 
 @media (max-width: 600px) {
 	body {
-		background-color: #f6f5f2;
+		background-color: #F7CAC9;
 		color: #000000;
 		font-family: Geneva, Arial, Helvetica, sans-serif;
 		align-items: center;
