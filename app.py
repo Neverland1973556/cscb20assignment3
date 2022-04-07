@@ -7,14 +7,13 @@ from sqlalchemy import text # textual queries
 
 app = Flask(__name__, template_folder="templates")
 #secret_key = os.urandom(12).hex()
-app.config['SECRET_KEY'] = "secret_key"
+app.config['SECRET_KEY'] = "ZhitaoXuPeiJiaGuo100"
 # set up the database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assignment3.db'
 # logout every 15 minutes
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes = 15)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-setIns = set()
 
 # use person to record users
 # typePerson indicate if it's student or Instructor
