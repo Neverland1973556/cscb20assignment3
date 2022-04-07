@@ -9,7 +9,7 @@ app = Flask(__name__, template_folder="templates")
 #secret_key = os.urandom(12).hex()
 app.config['SECRET_KEY'] = "secret_key"
 # set up the database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///a3database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assignment3.db'
 # logout every 15 minutes
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes = 15)
 db = SQLAlchemy(app)
