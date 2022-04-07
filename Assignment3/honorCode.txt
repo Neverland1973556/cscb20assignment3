@@ -1,0 +1,1 @@
+Honor Code: We Zhitao Xu (1006668697), Peijia Guo (1006682715) and Bhavajan Amarasingham (1007207951) pledge that this program represents my own program code and that we have coded on my own. We received help from no one in designing and debugging my program. We have also read the plagiarism section in the course info sheet of CSC B20 and understand the consequences.

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../static/style.css" />
+    {% block head %}{% endblock %}
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}"> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="heading">
+            <p>CSCB20 - Introduction to Databases and Web Applications</p>
+        </div>
+        <div class="leftNavigation">
+            <ul>
+                {% if session.name %}
+                <h3><a href="{{ url_for('home') }}">Home</a></h3>
+                <h3><a href="{{ url_for('calender')}}">Calendar</a></h3>
+                <h3><a href="https://piazza.com/utoronto.ca">Piazza</a></h3>
+                <h3><a href="{{ url_for('lecture')}}">Lecture</a></h3>
+                <h3><a href="{{ url_for('tut')}}">(Tut) Lab</a></h3>
+                <h3><a href="{{ url_for('assignment')}}">Assignment</a></h3>
+                <h3><a href="{{ url_for('test')}}">Test</a></h3>
+                <h3><a href="{{ url_for('resource')}}">Resource</a></h3>
+                <h3><a href="{{ url_for('courseteam')}}">Course Team</a></h3>
+                <h3><a href="https://markus.utsc.utoronto.ca/">Markus</a></h3>
+                {% if session.type == 0 %}
+                <!-- student -->
+                <h3><a href="{{ url_for('anonfeedback') }}">Anon Feedback</a></h3>
+                <h3><a href="{{ url_for('evaluation') }}">My Grade</a></h3>
+                {% else %}
+                <!-- teacher -->
+                <h3><a href="{{ url_for('feedback') }}">Feedback</a></h3>
+                <h3><a href="{{ url_for('teacherGrade') }}">Remarks</a></h3>
+                <h3><a href="{{ url_for('allmarks') }}">Student Marks</a></h3>
+                {% endif %}
+                <h3><a href="{{ url_for('logout') }}">Logout</a></h3>
+                {% else %}
+                <h3><a href="{{ url_for('home') }}">Home</a></h3>
+                <h3><a href="{{ url_for('login') }}">Login</a></h3>
+                <h3><a href="{{ url_for('register') }}">Register</a></h3>
+
+                {% endif %}
+            </ul>
+        </div>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div class="footer">
+            <p><a href="https://web.cs.toronto.edu/people/faculty-directory" target="_blank">Faculty of Computer Science
+                    at
+                    UofT</a><br>Site design by Zhitao Xu and Peijia Guo and Bhavajan Amarasingham</p>
+        </div>
+    </div>
+</body>
+
+</html>

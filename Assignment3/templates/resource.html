@@ -1,0 +1,72 @@
+{% extends "template.html" %}
+
+{% block head %}
+<title> Resource </title>
+{% endblock %}
+
+{% block content %}
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
+<h2>Online Resources</h2>
+
+<div class="note">
+    <ul>
+        <li>
+            <a href="./">
+                Course website</a><br>
+
+            Course information, lecture notes, tutorial material, important
+            announcements, etc. will be posted on the course website. It is
+            your responsibility to visit it frequently.
+        </li>
+
+        <li>Beginner Tutorial for <a href="http://code.tutsplus.com/tutorials/sql-for-beginners--net-8200"
+                target="_blank">MySQL</a>.
+
+
+        <li>
+            Email communication<br>
+
+            Questions regarding the course material, assignments, midterm,
+            etc. should be posed on the bulletin board. Questions about
+            the assignment which you feel you cannot formulate without
+            revealing your solution (should be very rare!), as well as
+            questions and concerns regarding your personal matters should
+            be directed to the instructor.
+
+        </li>
+        <li>
+            <a href="https://piazza.com/utoronto.ca" target="_blank">
+                Discussion board</a><br>
+
+            You are encouraged to use the bulletin board to discuss the
+            course material, pose questions on the assignments, etc. The
+            bulletin board will be monitored by the instructor and by your
+            TAs. Please, be very careful not to reveal (parts of) your
+            solution on the bulletin board.
+        </li>
+
+    </ul>
+</div>
+<h2>Software and documentation - Logging into Mathlab</h2>
+
+<ul>
+    <li> Mac OS comes with the application "terminal". Simple click on it to run. Login to mathlab
+        by
+        typing <br>
+
+        <p><code>ssh utorid@mathlab.utsc.utoronto.ca</code>. Enter your password.<BR></p>
+
+    </li>
+    <br>
+    <li>Windows - you will need a SSH client. PuTTY is a good free one. You can download and install
+        here: <a href="http://www.putty.org/" target="_blank">PuTTY</a>.
+        Use the same command as above to login to mathlab: <br>
+
+        <p><code>ssh utorid@mathlab.utsc.utoronto.ca</code>.</p>
+
+    </li>
+</ul>
+{% endif %}
+{% endblock %}

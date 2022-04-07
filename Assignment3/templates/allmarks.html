@@ -1,0 +1,56 @@
+{% extends "template.html" %}
+
+{% block head %}
+<title> All Marks </title>
+{% endblock %}
+
+{% block content %}
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
+{% if session.type == 1 %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="welcome">
+  <h3> {{ message }} </h3>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="grade">
+  <ul>
+    {% for Evaluations in query_all_student_mark_all %}
+    <li class="container_li">
+      <div class="li_flex">
+        <strong>Assignment Name: </strong>{{ Evaluations.typeName }},
+        &nbsp&nbsp<strong>Student Name: </strong>{{ Evaluations.stuName }},
+        &nbsp&nbsp<strong>Student Username: </strong>{{ Evaluations.student_username }},
+        <br><strong>Student Mark: </strong>{{ Evaluations.stuMark }},
+        &nbsp&nbsp<strong>Total Mark: </strong>{{ Evaluations.total_mark }},
+        &nbsp&nbsp
+        {% if Evaluations.remark_signal == 0 %}
+        <strong>Remark Status: </strong>Not Remark Yet
+        {% else %}
+        <strong>Remark Status: </strong>Already Remarked
+        {% endif %}
+        <br>
+        <br>
+      </div>
+      <form class="teacher_grade_css" action="/allmarks" method="post">
+        <input class="grade_input" name="eid" value={{ Evaluations.eid }} hidden></input>
+        <input class="grade_input" name="total_mark" value={{ Evaluations.total_mark}} hidden></input>
+        <input class="grade_input" name="stuMark" placeholder="Remark to:"></input>
+        <button type="Remark">Remark</button>
+      </form>
+      <br></br>
+    </li>
+    {% endfor %}
+  </ul>
+
+</div>
+{% else %}
+<p>Access Denied</p>
+{% endif %}
+{% endif %}
+{% endblock %}

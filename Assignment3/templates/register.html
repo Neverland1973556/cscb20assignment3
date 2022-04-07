@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+{% block head %}
+<title> Register </title>
+{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories = True) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="welcome">
+    <h3>{{ category }} - {{ message }}</h3>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<form class="login_css" action="/register" method="post">
+
+    <label for="username">Username</label>
+    <input type="text" id="Username" name="Username">
+
+    <label for="mail"> Email </label>
+    <input type="text" id="Email" name="Email">
+
+    <label for="name">Legal Name</label>
+    <input type="text" id="realName" name="realName">
+
+    <label for="Password">Password</label>
+    <textarea id="text" name="Password"></textarea>
+
+    <!-- <label for="typePerson">typePerson</label>
+    <textarea id="text" name="typePerson"></textarea> -->
+
+    <select id="typePerson" name="typePerson" type="integer">
+        <option value=0>Register as Student</option>
+        <option value=1>Register as Instructor</option>
+    </select>
+
+    <button type="register_1">Register</button>
+</form>
+{% endblock %}

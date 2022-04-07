@@ -1,0 +1,53 @@
+{% extends "template.html" %}
+
+{% block head %}
+<title> Assignment </title>
+{% endblock %}
+
+{% block content %}
+{% if not session.name %}
+<p>Access Denied</p>
+{% else %}
+<div class="note">
+    <h2>Overview</h2>
+    <p>
+        Here are the assignment and exercise topics, weights, and due
+        dates. I
+        will be posting the exercise and assignment handouts here. All exercises and
+        assignments
+        will be submitted on <a href="http://markus.utsc.utoronto.ca" target="_blank">MarkUs</a>.
+    </p>
+    <h2>Assignments</h2>
+    <div class="note">
+        <ul>
+            <li>
+                Assignment 1 - <a href="/static//sub/dummy.pdf" target="_blank">Assignment1 Handout</a><br>
+                Topic: Relational Algebra and MySQL <br> Weight: 15% <br> Due
+                Date: Part 1: Wednesday Feb. 1, 11.59pm. Part 2 and 3: For 5% bonus Saturday Feb. 11,
+                11.59pm or
+                Friday Feb. 17, 11.59. <br> Solution: <a href="/static//sub/dummy.pdf" target="_blank">Solution</a>
+            </li>
+            <li>
+                Assignment 2 - <a href="/static//sub/dummy.pdf" target="_blank">Assignment2 Handout</a><br>
+                Topic: HTML, CSS, PHP <br>
+                Weight: 15% <br> Due Date: Part 1:
+                Worth 50% Friday March. 10, 11.59pm. Part 2: Worth 50% Friday March. 19, 11.59pm <br>
+                Solution:
+            </li>
+            <li>
+                Assignment 3 - <a href="/static/sub/dummy.pdf" target="_blank">Assignment3 Handout</a><br>Topic: Web
+                Application and
+                Database<br> Weight: 15%<br> Due Date: Friday March 31, 11.59pm <br> Solution:</li>
+        </ul>
+    </div>
+</div>
+
+<br>
+<h2>FAQ - Assignment 1</h2>
+<p>Q. If the mysql portion asks for a director or actor without specifying which attributes, what should I
+    return?<br>
+    A. Return the first name, last name. <br><br>
+</p>
+
+{% endif %}
+{% endblock %}

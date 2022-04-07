@@ -1,0 +1,1142 @@
+@media (min-width: 1200px) {
+
+	/* basic define of the styles in computer view */
+	body {
+		background-color: #f6f5f2;
+		color: #000000;
+		font-family: Geneva, Arial, Helvetica, sans-serif;
+		align-items: center;
+		overflow-wrap: break-word;
+	}
+
+	h1 {
+		color: #330033;
+		font-family: Geneva, Arial, Helvetica, sans-serif;
+		font-size: x-large;
+		font-style: oblique;
+		font-weight: bold;
+		margin-bottom: 2%;
+	}
+
+	h2 {
+		color: #330033;
+		font-size: large;
+		border-bottom: solid 1px #330033;
+		margin-bottom: 1%;
+	}
+
+	h3, h4 {
+		color: #003366;
+		font-size: large;
+		font-style: normal;
+		font-weight: bold;
+		font-variant: normal;
+	}
+
+	h5, h6 {
+		color: #6699CC;
+	}
+
+	a {
+		color: #9999cc;
+	}
+
+	a:hover {
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	* {
+		margin: 0%;
+	}
+
+	li {
+		font-size: 16px;
+	}
+
+	img {
+		width: 600px;
+	}
+
+	iframe {
+		width: 100%;
+		height: 600px;
+	}
+
+	input::placeholder {
+		color: rgb(43, 37, 37);
+	}
+
+	input:focus,
+	textarea:focus,
+	select:focus {
+		border-color: rgb(42, 202, 154);
+	}
+
+	button {
+		font-size: 16px;
+		font-weight: 600;
+		text-transform: uppercase;
+		padding: 15px 26px;
+		color: #FFF;
+		background-color: rgb(42, 202, 154);
+		border-radius: 4px;
+		border: 1px solid rgb(42, 202, 154);
+		border-left-style: solid;
+		text-align: center;
+		width: 100%;
+	}
+
+	button:hover {
+		background-color: rgb(42, 170, 154);
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	label {
+		display: block;
+		line-height: 24px;
+		font-size: 20px;
+		font-weight: 400;
+		margin-bottom: 4px;
+		text-align: center;
+	}
+
+	/* main container of the template */
+	.container {
+		display: flex;
+		flex-flow: row wrap;
+	}
+
+	/* header of the website */
+	.heading {
+		color: #FFFFFF;
+		background-color: #4388e4;
+		height: 35px;
+		width: 100%;
+		top: 0px;
+		padding-top: 25px;
+		padding-bottom: 20px;
+		font-variant: normal;
+		text-align: center;
+		vertical-align: middle;
+		font-size: x-large;
+		font-weight: bold;
+		font-style: oblique;
+		margin-bottom: 0%;
+		flex: 1 100%;
+	}
+
+	/* the navigation bar */
+	.leftNavigation {
+		justify-content: center;
+		flex-grow: 1;
+		flex: 100%;
+	}
+
+	/* all the element in the navigation bar */
+	.leftNavigation ul {
+		width: 100%;
+		display: flex;
+		flex-wrap: nowrap;
+		list-style-type: none;
+		text-align: middle;
+		padding: 0;
+		overflow: hidden;
+		background-color: rgb(98, 179, 204);
+		margin-bottom: 2%;
+	}
+
+	.leftNavigation h3 {
+		background-color: #12beb6;
+		flex: auto;
+		float: left;
+		margin: 1px;
+	}
+
+	.leftNavigation h3 a {
+		display: block;
+		color: rgb(29, 18, 18);
+		text-align: center;
+		padding: 10px 12px;
+		text-decoration: none;
+	}
+
+	.leftNavigation a {
+		text-decoration: none;
+	}
+
+	.leftNavigation a:link {
+		color: #FFFFFF;
+	}
+
+	.leftNavigation a:visited {
+		color: #FFFFFF;
+	}
+
+	.leftNavigation a:hover {
+		background-color: rgb(26, 91, 151);
+		color: #CCCCCC;
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	/* flex of the navigation bar */
+	.content {
+		flex: 1 100%;
+		justify-content: center;
+		margin-top: 1%;
+		margin-left: 20%;
+		margin-right: 20%;
+	}
+
+	.content p {
+		padding-left: 20px;
+		font-size: medium;
+		margin-bottom: 3%;
+	}
+
+	/* note for a2, main type of all notes */
+	.note li {
+		margin-bottom: 7px;
+	}
+
+	/* all footer settings */
+	.footer {
+		margin-top: 5%;
+		margin-bottom: 1%;
+		flex: 1 100%;
+		text-align: center;
+		font-size: 16px;
+		color: grey;
+		font-family: sans-serif;
+	}
+
+	.footer a {
+		font-size: 16px;
+		color: grey;
+		font-family: sans-serif;
+	}
+
+	/* the container for the marking page */
+	.container_li {
+		display: flex;
+		flex-flow: row nowrap;
+		margin-bottom: 5px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	/* contain of marking page */
+	.li_flex {
+		flex: 3;
+		font-style: italic;
+		text-align: center;
+		margin-right: 5%;
+	}
+
+	/* marking button */
+	.teacher_grade_css {
+		flex: 1;
+	}
+
+	/* grade input for instructor to regrade */
+	.grade_input {
+		height: 40px;
+		width: 150px;
+		padding: 0px;
+	}
+
+	.grade_input::placeholder {
+		color: rgb(128, 128, 128);
+	}
+
+	/* grade button, use blue color */
+	.teacher_grade_css button {
+		width: 154px;
+		font-size: 14px;
+		font-weight: 600;
+		background-color: #4388e4;
+		border-color: #4388e4;
+		border-radius: 4px;
+	}
+
+	.teacher_grade_css button:hover {
+		background-color: #2d6cbd;
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	/* login part of form and button */
+	.login_css {
+		max-width: 40%;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 16px;
+		border: 1px solid rgb(42, 202, 154);
+	}
+
+	.login_css input,
+	.login_css textarea,
+	.login_css select {
+		background-color: #ffffff;
+		border: 1px solid #e5e5e4;
+		font-size: 16px;
+		height: auto;
+		outline: 0;
+		height: 48px;
+		width: 100%;
+		color: #282b2d;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+		margin-bottom: 16px;
+		transition: all .2s ease;
+		text-align: center;
+	}
+
+	/* evaluation part of css, max-width is 80% */
+	.evaluation_css {
+		max-width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 16px;
+		border: 1px solid rgb(42, 202, 154);
+	}
+
+	.evaluation_css textarea,
+	.evaluation_css select {
+		background-color: #ffffff;
+		border: 1px solid #e5e5e4;
+		font-size: 16px;
+		height: auto;
+		outline: 0;
+		height: 100px;
+		width: 100%;
+		color: #282b2d;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+		margin-bottom: 8px;
+		transition: all .2s ease;
+		text-align: center;
+	}
+
+	.evaluation_css h3 {
+		margin-bottom: 5px;
+	}
+
+	/* css for flash information */
+	.welcome {
+		text-align: center;
+	}
+
+	.welcome h3 {
+		margin-bottom: 20px;
+	}
+
+	.feedbacks li {
+		max-width: 800px;
+	}
+
+	.all_marks {
+		align-items: center;
+	}
+
+	/* id of css -> only use once */
+	/* the course_team page */
+	#team {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		text-align: center;
+	}
+
+	#team img {
+		width: 240px;
+		height: 300px;
+	}
+
+	/* remark page container for student -> id */
+	#student_remark_container {
+		display: flex;
+		flex-flow: row wrap;
+		margin-bottom: 10px;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+
+	#remark_info {
+		flex: 2;
+		font-style: italic;
+	}
+
+	#remark_button {
+		flex: 3;
+	}
+
+	/* some special case*/
+
+	#instructors {
+		height: 48px;
+	}
+
+	#feedback_textarea {
+		height: 100px;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 1200px) {
+	body {
+		background-color: #f6f5f2;
+		color: #000000;
+		font-family: Geneva, Arial, Helvetica, sans-serif;
+		align-items: center;
+		overflow-wrap: break-word;
+	}
+
+	h1 {
+		color: #330033;
+		font-family: Geneva, Arial, Helvetica, sans-serif;
+		font-size: x-large;
+		font-style: oblique;
+		font-weight: bold;
+		margin-bottom: 2%;
+	}
+
+	h2 {
+		color: #330033;
+		font-size: large;
+		border-bottom: solid 1px #330033;
+		margin-bottom: 2%;
+	}
+
+	h3, h4 {
+		color: #003366;
+		font-size: large;
+		font-style: normal;
+		font-weight: bold;
+		font-variant: normal;
+	}
+
+	h5, h6 {
+		color: #6699CC;
+	}
+
+	a {
+		color: #9999cc;
+	}
+
+	a:hover {
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	* {
+		margin: 0%;
+	}
+
+	li {
+		font-size: 16px;
+	}
+
+	img {
+		width: 80%;
+	}
+
+	iframe {
+		width: 100%;
+		height: 600px;
+	}
+
+	input::placeholder {
+		color: rgb(43, 37, 37);
+	}
+
+	input:focus,
+	textarea:focus,
+	select:focus {
+		border-color: rgb(42, 202, 154);
+	}
+
+	button {
+		font-size: 16px;
+		font-weight: 600;
+		text-transform: uppercase;
+		padding: 15px 26px;
+		color: #FFF;
+		background-color: rgb(42, 202, 154);
+		border-radius: 4px;
+		border: 1px solid rgb(42, 202, 154);
+		border-left-style: solid;
+		text-align: center;
+		width: 100%;
+	}
+
+	button:hover {
+		background-color: rgb(42, 170, 154);
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	label {
+		display: block;
+		line-height: 24px;
+		font-size: 20px;
+		font-weight: 400;
+		margin-bottom: 4px;
+		text-align: center;
+	}
+
+
+	.container {
+		display: flex;
+		flex-flow: row wrap;
+	}
+
+	.heading {
+		color: #FFFFFF;
+		background-color: #4388e4;
+		height: 35px;
+		width: 100%;
+		top: 0px;
+		padding-top: 25px;
+		padding-bottom: 20px;
+		font-variant: normal;
+		text-align: center;
+		vertical-align: middle;
+		font-size: larger;
+		font-weight: bold;
+		font-style: oblique;
+		margin-bottom: 0%;
+		flex: 1 100%;
+	}
+
+	.leftNavigation {
+		justify-content: center;
+		flex-grow: 1;
+		flex: 100%;
+	}
+
+	.leftNavigation ul {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		list-style-type: none;
+		text-align: middle;
+		padding: 0;
+		overflow: hidden;
+		background-color: rgb(98, 179, 204);
+		margin-bottom: 2%;
+	}
+
+	.leftNavigation h3 {
+		background-color: #12beb6;
+		flex: auto;
+		float: left;
+		margin: 1px;
+	}
+
+	.leftNavigation h3 a {
+		display: block;
+		color: rgb(29, 18, 18);
+		text-align: center;
+		padding: 10px 12px;
+		text-decoration: none;
+	}
+
+	.leftNavigation a {
+		text-decoration: none;
+	}
+
+	.leftNavigation a:link {
+		color: #FFFFFF;
+	}
+
+	.leftNavigation a:visited {
+		color: #FFFFFF;
+	}
+
+	.leftNavigation a:hover {
+		background-color: rgb(26, 91, 151);
+		color: #CCCCCC;
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	.content {
+		justify-content: center;
+		flex: 7;
+		margin-top: 1%;
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+
+	.content p {
+		padding-left: 20px;
+		font-size: medium;
+		margin-bottom: 3%;
+	}
+
+
+	/* login part of form and button */
+	.login_css {
+		max-width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 16px;
+		border: 1px solid rgb(42, 202, 154);
+	}
+
+	.login_css input,
+	.login_css textarea,
+	.login_css select {
+		background-color: #ffffff;
+		border: 1px solid #e5e5e4;
+		font-size: 16px;
+		height: auto;
+		outline: 0;
+		height: 48px;
+		width: 100%;
+		color: #282b2d;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+		margin-bottom: 16px;
+		transition: all .2s ease;
+		text-align: center;
+	}
+
+	.footer {
+		margin-top: 5%;
+		margin-bottom: 1%;
+		flex: 1 100%;
+		text-align: center;
+		font-size: 16px;
+		color: grey;
+		font-family: sans-serif;
+	}
+
+	.footer a {
+		font-size: 16px;
+		color: grey;
+		font-family: sans-serif;
+	}
+
+	.test {
+		flex: 1;
+
+	}
+
+	.note li {
+		margin-bottom: 7px;
+	}
+
+	/* the container for the marking page */
+	.container_li {
+		display: flex;
+		flex-flow: row nowrap;
+		margin-bottom: 5px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	/* contain of marking page */
+	.li_flex {
+		flex: 2;
+		font-style: italic;
+		text-align: center;
+		margin-right: 5%;
+		max-width: 80%;
+	}
+
+	/* marking button */
+	.teacher_grade_css {
+		flex: 1;
+	}
+
+	/* grade input for instructor to regrade */
+	.grade_input {
+		height: 35px;
+		width: 135px;
+	}
+
+	.grade_input::placeholder {
+		color: rgb(128, 128, 128);
+	}
+
+	.teacher_grade_css button {
+		width: 141px;
+		font-size: 14px;
+		font-weight: 600;
+		background-color: #4388e4;
+		border-color: #4388e4;
+		border-radius: 4px;
+	}
+
+	.teacher_grade_css button:hover {
+		background-color: #2d6cbd;
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	.evaluation_css {
+		max-width: 70%;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 16px;
+		border: 1px solid rgb(42, 202, 154);
+	}
+
+	.evaluation_css textarea,
+	.evaluation_css select {
+		background-color: #ffffff;
+		border: 1px solid #e5e5e4;
+		font-size: 16px;
+		height: auto;
+		outline: 0;
+		height: 80px;
+		width: 100%;
+		color: #282b2d;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+		margin-bottom: 8px;
+		transition: all .2s ease;
+		text-align: center;
+	}
+
+	.evaluation_css h3 {
+		margin-bottom: 5px;
+	}
+
+	.welcome {
+		text-align: center;
+	}
+
+	.welcome h3 {
+		margin-bottom: 20px;
+	}
+
+	.feedbacks li {
+		max-width: 500px;
+	}
+
+	.all_marks {
+		align-items: center;
+	}
+
+	#team {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		text-align: center;
+	}
+
+	#team img {
+		width: 120px;
+		height: 160px;
+	}
+
+
+	/* remark page container for student -> id */
+	#student_remark_container {
+		display: flex;
+		flex-flow: row wrap;
+		margin-bottom: 10px;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+
+	#remark_info {
+		flex: 3;
+		font-style: italic;
+	}
+
+	#remark_button {
+		flex: 5;
+	}
+
+	/* some special case*/
+
+	#instructors {
+		height: 48px;
+	}
+
+	#feedback_textarea {
+		height: 100px;
+	}
+}
+
+@media (max-width: 600px) {
+	body {
+		background-color: #f6f5f2;
+		color: #000000;
+		font-family: Geneva, Arial, Helvetica, sans-serif;
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		overflow-wrap: break-word;
+	}
+
+	h1 {
+		color: #330033;
+		font-family: Geneva, Arial, Helvetica, sans-serif;
+		font-size: large;
+		font-style: oblique;
+		font-weight: bold;
+		margin-bottom: 3%;
+	}
+
+	h2 {
+		color: #330033;
+		font-size: 14px;
+		border-bottom: solid 1px #330033;
+		margin-bottom: 3%;
+	}
+
+	h3, h4 {
+		color: #003366;
+		font-size: small;
+		font-style: normal;
+		font-weight: bold;
+		font-variant: normal;
+	}
+
+	h5, h6 {
+		font-size: smaller;
+		color: #6699CC;
+	}
+
+	a {
+		color: #9999cc;
+		font-size: 14px;
+	}
+
+	a:hover {
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	* {
+		margin: 0%;
+	}
+
+	li {
+		font-size: 14px;
+	}
+
+	img {
+		width: 85%;
+	}
+
+	iframe {
+		width: 100%;
+		height: 400px;
+	}
+
+	input::placeholder {
+		color: rgb(43, 37, 37);
+	}
+
+	input:focus,
+	textarea:focus,
+	select:focus {
+		border-color: rgb(42, 202, 154);
+	}
+
+	button {
+		font-size: 14px;
+		font-weight: 600;
+		text-transform: uppercase;
+		padding: 15px 26px;
+		color: #FFF;
+		background-color: rgb(42, 202, 154);
+		border-radius: 4px;
+		border: 1px solid rgb(42, 202, 154);
+		border-left-style: solid;
+		text-align: center;
+		width: 100%;
+	}
+
+	button:hover {
+		background-color: rgb(42, 170, 154);
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	label {
+		display: block;
+		line-height: 24px;
+		font-size: 14px;
+		font-weight: 400;
+		margin-bottom: 4px;
+		text-align: center;
+	}
+
+	.container {
+		display: flex;
+		flex-flow: row wrap;
+
+	}
+
+	.heading {
+		flex: 1 100%;
+		color: #FFFFFF;
+		background-color: #12beb6;
+		width: 100%;
+		top: 0px;
+		padding-top: 20px;
+		padding-bottom: 10px;
+		padding-left: 10px;
+		padding-right: 10px;
+		font-variant: normal;
+		text-align: center;
+		vertical-align: middle;
+		font-size: larger;
+		font-weight: bold;
+		font-style: oblique;
+		margin-bottom: 1%;
+	}
+
+	.leftNavigation {
+		justify-content: center;
+		flex-grow: 1;
+		flex: 100%;
+	}
+
+	.leftNavigation ul {
+		flex: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		list-style-type: none;
+		margin-left: 1%;
+		margin-right: 1%;
+		padding: 0;
+		overflow: hidden;
+		background-color: rgb(98, 179, 204);
+		margin-bottom: 2%;
+	}
+
+	.leftNavigation h3 {
+		background-color: #4e9be7;
+		flex: auto;
+		float: left;
+		margin: 1px;
+	}
+
+	.leftNavigation h3 a {
+		display: block;
+		color: rgb(29, 18, 18);
+		text-align: center;
+		padding: 10px 12px;
+		text-decoration: none;
+	}
+
+	.leftNavigation a {
+		text-decoration: none;
+	}
+
+	.leftNavigation a:link {
+		color: #FFFFFF;
+	}
+
+	.leftNavigation a:visited {
+		color: #FFFFFF;
+	}
+
+	.leftNavigation a:hover {
+		background-color: rgb(26, 91, 151);
+		color: #CCCCCC;
+		font-style: oblique;
+		/* font-weight: bolder; */
+	}
+
+	.content {
+		flex: 100%;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+
+	.content p {
+		padding-left: 20px;
+		font-size: 14px;
+		margin-bottom: 3%;
+	}
+
+	.note li {
+		margin-bottom: 3px;
+	}
+
+	/* the container for the marking page */
+	.container_li {
+		justify-content: center;
+		align-items: center;
+	}
+
+	/* contain of marking page */
+	.li_flex {
+		font-style: italic;
+		margin-right: 5%;
+	}
+	
+	.teacher_grade_css button{
+		width: 154px;
+		font-size: 14px;
+		font-weight: 600;
+		background-color: #4388e4;
+		border-color: #4388e4;
+		border-radius: 4px;
+		text-transform: uppercase;
+		width: auto;
+		padding: 2px 5px;
+		font-size: 14px;
+		height: 25px;
+	}
+	.teacher_grade_css input{
+		background-color: #ffffff;
+		border: 1px solid #e5e5e4;
+		font-size: 14px;
+		height: auto;
+		height: 25px;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+
+	}
+	input::placeholder{
+		color:rgb(128, 128, 128);
+	}
+
+	button:hover {
+		background-color: rgb(59, 85, 230);
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	.footer {
+		margin-top: 25%;
+		margin-bottom: 1%;
+		flex: 1 100%;
+		text-align: center;
+		font-size: 14px;
+		color: grey;
+		font-family: sans-serif;
+	}
+
+	.footer a {
+		font-size: 14px;
+		color: grey;
+		font-family: sans-serif;
+	}
+
+	.login_css {
+		max-width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 15px;
+		border: 1px solid rgb(42, 202, 154);
+	}
+	.login_css input,
+	.login_css textarea,
+	.login_css select {
+		background-color: #ffffff;
+		border: 1px solid #e5e5e4;
+		font-size: 16px;
+		height: auto;
+		outline: 0;
+		height: 48px;
+		width: 100%;
+		color: #282b2d;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+		margin-bottom: 16px;
+		transition: all .2s ease;
+		text-align: center;
+	}
+	.login_css button:hover{
+		background-color: rgb(39, 151, 104);
+		font-style: oblique;
+		font-weight: bolder;
+	}
+
+	/* css for flash information */
+	.welcome {
+		text-align: center;
+	}
+
+	.welcome h3 {
+		margin-bottom: 20px;
+	}
+
+	.feedbacks li {
+		max-width: 250px;
+	}
+
+	.all_marks {
+		align-items: center;
+	}
+
+
+	/* remark page container for student -> id */
+	#student_remark_container {
+		margin-bottom: 10px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	#remark_info {
+		flex: 2;
+		font-style: italic;
+	}
+
+	#remark_button {
+		flex: 3;
+	}
+
+	.evaluation_css {
+		max-width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 16px;
+		border: 1px solid rgb(42, 202, 154);
+	}
+
+	.evaluation_css textarea,
+	.evaluation_css select {
+		background-color: #ffffff;
+		border: 1px solid #e5e5e4;
+		font-size: 16px;
+		height: auto;
+		outline: 0;
+		height: 100px;
+		width: 100%;
+		color: #282b2d;
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+		margin-bottom: 8px;
+		transition: all .2s ease;
+		text-align: center;
+	}
+
+	.evaluation_css h3 {
+		margin-bottom: 5px;
+	}
+
+
+	/* some special case*/
+
+	#instructors {
+		height: 25px;
+		font-size: 14px;
+	}
+
+	#feedback_textarea {
+		height: 80px;
+	}
+
+
+	#team {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 100%;
+		text-align: center;
+	}
+
+	#team img {
+		width: 120px;
+		height: 160px;
+	}
+
+}
