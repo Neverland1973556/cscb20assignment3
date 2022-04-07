@@ -155,6 +155,9 @@ def anonfeedback():
     else:
         username = request.form['instructors']
         text_for_instructors = request.form['todo-input']
+        if not text_for_instructors:
+            flash('Please enter your feedback!')
+            return redirect(url_for('anonfeedback'))
         feedback_details =(
             username,
             # Id will be provided automatically by machine
