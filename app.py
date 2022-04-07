@@ -18,6 +18,10 @@ bcrypt = Bcrypt(app)
 # use person to record users
 # typePerson indicate if it's student or Instructor
 class Person(db.Model):
+    """
+    Class person includes both instructors and students. It contains all information of a user with password hashed.
+    Id is the primary key. Instructors will have typePerson as 1. Students will have typePerson as 0.
+    """
     __tablename__ = 'Person'
     Id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(20), nullable = False)
@@ -32,6 +36,10 @@ class Person(db.Model):
 
 # schema for grades
 class Evaluation(db.Model):
+    """
+    This represents an evaluation of the course, where student can submit a remark request.
+    eid is the primary key and remark_signal denotes whether a evaluation needs remakr or not.
+    """
     __tablename__ = 'Evaluation'
     eid = db.Column(db.Integer, primary_key = True)
     stuMark = db.Column(db.Integer)
@@ -49,6 +57,10 @@ class Evaluation(db.Model):
 
 # schema for feedback
 class Feedback(db.Model):
+    """
+    This denotes the feedback from a student to an instructor, with fid as the primary key.
+    An instructor can only see his or her own feedback with students' names hidden.
+    """
     __tablename__ = 'Feedback'
     fid = db.Column(db.Integer, primary_key = True)
     feedbackText = db.Column(db.String(200), nullable=False)
@@ -58,6 +70,9 @@ class Feedback(db.Model):
         return f"Feedback('{self.student_id}', '{self.instructor_id}')"
 
 class Assignment(db.Model):
+    """
+    This denotes an assignment of the course, with aid as the primary key.
+    """
     __tablename__ = 'Assignment'
     aid = db.Column(db.Integer, primary_key = True)
     assignment_name = db.Column(db.String(20), nullable = False, unique=True)
@@ -76,6 +91,9 @@ def home():
 # register page
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
+    """
+    Register a new user and store the user's information into database.
+    """
     if request.method == 'GET':
         return render_template('register.html')
     else:
@@ -86,6 +104,10 @@ def register():
 
         if not name or not username or not email or not request.form['Password']:
             flash('Please enter the information required!', 'message')
+            return render_template('register.html')
+
+        if not "@" in email:
+            flash('Please enter a valid email!')
             return render_template('register.html')
 
         hashed_password = bcrypt.generate_password_hash(request.form['Password']).decode('utf-8')
@@ -117,6 +139,9 @@ def register():
 # login page
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
+    """
+    Check for the match of username and password of a user to determine login or not.
+    """
     if request.method == 'GET':
         if 'name' in session:
             flash('Already logged in!!')
@@ -142,12 +167,18 @@ def login():
 # logout page
 @app.route('/logout')
 def logout():
+    """
+    Logout of a user.
+    """
     session.pop('name', default = None)
     flash('You have successfully logged out! Now you can login or register!')
     return redirect(url_for('home'))
 
 @app.route("/anonfeedback", methods = ['GET', 'POST'])
 def anonfeedback():
+    """
+    On student's side, add a piece of feedback to the selected instructor.
+    """
     query_instructors_all = query_instructors()
     if request.method == 'GET':
         return render_template("anonfeedback.html", query_instructors_all = query_instructors_all)
@@ -168,6 +199,9 @@ def anonfeedback():
 
 @app.route("/feedback", methods = ['GET', 'POST'])
 def feedback():
+    """
+    On instructor's side, get the feedback for the current instructor user.
+    """
     username = session['name']
     feedback_for_instructor = query_instructors_see(username)
     if request.method == 'GET':
@@ -176,6 +210,9 @@ def feedback():
 
 @app.route("/teacherGrade", methods = ['GET', 'POST'])
 def teacherGrade():
+    """
+    Get the marks of students, while instructor can edit student's grades.
+    """
     get_student_marks = query_all_student_marks()
     if request.method == 'GET':
         return render_template("teacherGrade.html", query_all_student_mark = get_student_marks)
@@ -197,6 +234,9 @@ def teacherGrade():
 
 @app.route("/allmarks", methods = ['GET', 'POST'])
 def allmarks():
+    """
+    Get the marks of students, and instructor can edit student's grades.
+    """
     get_student_marks = query_all_student_marks_all()
     if request.method == 'GET':
         return render_template("allmarks.html", query_all_student_mark_all = get_student_marks)
@@ -219,6 +259,9 @@ def allmarks():
 
 @app.route("/evaluation", methods = ['GET', 'POST'])
 def evaluation():
+    """
+    On student's side, submit a remark request to instructors about a certain piece of class Assignment.
+    """
     username = session['name']
     student_marks = query_student_marks(username)
     if request.method == 'GET':
