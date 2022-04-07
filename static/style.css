@@ -2,9 +2,6 @@
 
 	/* basic define of the styles in computer view */
 	body {
-		background-image: url(./sub/a14.jpg);
-		background-repeat: no-repeat;
-		background-size: cover;
 		background-color: #f6f5f2;
 		color: #000000;
 		font-family: Geneva, Arial, Helvetica, sans-serif;
@@ -388,9 +385,6 @@
 
 @media (min-width: 600px) and (max-width: 1200px) {
 	body {
-		background-image: url(./sub/a14.jpg);
-		background-repeat: no-repeat;
-		background-size: cover;
 		background-color: #f6f5f2;
 		color: #000000;
 		font-family: Geneva, Arial, Helvetica, sans-serif;
@@ -770,9 +764,6 @@
 
 @media (max-width: 600px) {
 	body {
-		background-image: url(./sub/a14.jpg);
-		background-repeat: no-repeat;
-		background-size: cover;
 		background-color: #f6f5f2;
 		color: #000000;
 		font-family: Geneva, Arial, Helvetica, sans-serif;

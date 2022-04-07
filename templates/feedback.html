@@ -9,38 +9,38 @@
 {% if not session.name %}
 <p>Access Denied</p>
 {% else %}
-    {% if session.type == 1 %}
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-          <div class = "welcome">
-            <h3> {{ message }} </h3>
-          </div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
-    <!-- {% for Notes in query_notes_result %}
+{% if session.type == 1 %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="welcome">
+  <h3> {{ message }} </h3>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<!-- {% for Notes in query_notes_result %}
     <p> {{ Notes }} </p>
     {% endfor %}  -->
-    <br>
-    <div class="feedbacks">
-        <h3>
-            Students' Feedback for instructor
-            {% if session.name %}
-                {{ session.name }}:
-            {% endif %}
-        </h3>
-        <br>
-
-        <ul>
-            {% for Feedbacks in feedback_for_instructor %}
-            <li> {{ Feedbacks.feedbackText }} </li>
-            <br>
-            {% endfor %}
-        </ul>
-    </div>
-    {% else %}
-    <p>Access Denied</p>
+<br>
+<div class="feedbacks">
+  <h3>
+    Students' Feedback for instructor
+    {% if session.name %}
+    {{ session.name }}:
     {% endif %}
+  </h3>
+  <br>
+
+  <ul>
+    {% for Feedbacks in feedback_for_instructor %}
+    <li> {{ Feedbacks.feedbackText }} </li>
+    <br>
+    {% endfor %}
+  </ul>
+</div>
+{% else %}
+<p>Access Denied</p>
+{% endif %}
 {% endif %}
 {% endblock %}
